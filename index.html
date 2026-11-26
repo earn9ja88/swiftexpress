@@ -4,236 +4,808 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#24134a">
-<title>SwiftExpress | Worldwide Shipping & Logistics</title>
-<meta name="description" content="SwiftExpress international shipping, courier and logistics services. Track your shipment worldwide.">
+<meta name="theme-color" content="#172b55">
+<title>SwiftExpress | Global Shipping & Logistics</title>
+<meta name="description" content="SwiftExpress worldwide courier, parcel delivery and international logistics.">
+
 <style>
 :root {
-  --purple:#24134a;
-  --deep:#170d31;
-  --orange:#ff902e;
-  --light:#f7f6fa;
-  --text:#242137;
+  --navy:#172b55;
+  --deep:#101e3c;
+  --orange:#f47721;
+  --white:#fff;
+  --light:#f4f6fa;
+  --text:#26334a;
+  --muted:#68758a;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.6;background:white}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.6}
 a{text-decoration:none;color:inherit}
-button{cursor:pointer;font:inherit}
-.topbar{background:var(--deep);color:white;text-align:center;padding:9px;font-size:12px}
-header{background:var(--purple);color:white;padding:17px 6%;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
-.logo span{color:var(--orange)}
-nav{display:flex;gap:25px;align-items:center;font-size:14px}
+button,select,input{font:inherit}
+button,a{cursor:pointer}
+img{display:block;max-width:100%}
+
+.topbar{
+ background:var(--deep);color:white;padding:9px 6%;
+ display:flex;justify-content:space-between;gap:12px;
+ flex-wrap:wrap;font-size:12px
+}
+.topbar a{color:#ffc18e}
+header{
+ background:white;padding:15px 6%;display:flex;
+ align-items:center;justify-content:space-between;
+ gap:18px;position:sticky;top:0;z-index:50;
+ box-shadow:0 3px 15px #172b5510
+}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy)}
+.brand-icon{
+ background:var(--orange);color:white;width:43px;height:43px;
+ display:grid;place-items:center;border-radius:9px;font-size:25px
+}
+.brand-name{font-size:24px;font-weight:900;line-height:1.1}
+.brand-name span{color:var(--orange)}
+.brand small{display:block;font-size:9px;letter-spacing:1.5px;margin-top:4px}
+nav{display:flex;align-items:center;gap:20px;font-size:13px;font-weight:bold}
 nav a:hover{color:var(--orange)}
-.nav-btn,.primary{background:var(--orange);color:#24134a;border:0;padding:12px 20px;border-radius:5px;font-weight:bold}
-.hero{background:linear-gradient(90deg,rgba(23,13,49,.96),rgba(23,13,49,.72)),url('https://images.unsplash.com/photo-1494412519320-aa613dfb7738?w=1800') center/cover;color:white;padding:85px 7% 95px}
+.header-right{display:flex;align-items:center;gap:10px}
+.language{
+ max-width:145px;border:1px solid #ddd;border-radius:5px;
+ padding:9px;background:white;color:var(--navy)
+}
+.btn{
+ display:inline-block;border:0;border-radius:5px;padding:13px 20px;
+ background:var(--orange);color:white;font-weight:bold
+}
+.btn:hover{background:#dc6411}
+.btn-outline{background:transparent;border:1px solid white;color:white}
+.menu-toggle{display:none;background:none;border:0;font-size:25px;color:var(--navy)}
+
+.hero{
+ min-height:520px;color:white;display:flex;align-items:center;
+ padding:75px 7%;
+ background:
+ linear-gradient(90deg,#101e3cf2 0%,#101e3cbd 48%,#101e3c20 100%),
+ url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1800') center/cover
+}
 .hero-content{max-width:650px}
-.eyebrow{color:var(--orange);font-size:13px;font-weight:bold;letter-spacing:2px}
-h1{font-size:clamp(36px,6vw,64px);line-height:1.12;margin:18px 0}
-.hero p{color:#e0dbea;font-size:17px;max-width:560px}
-.hero-actions{display:flex;gap:13px;margin-top:27px;flex-wrap:wrap}
-.secondary{border:1px solid white;background:transparent;color:white;padding:12px 20px;border-radius:5px}
-.tracking{background:white;padding:28px;border-radius:9px;max-width:850px;margin:-42px auto 0;position:relative;box-shadow:0 8px 35px #00000015}
-.tracking h2{color:var(--purple);font-size:22px;margin-bottom:12px}
+.eyebrow{color:#ffb477;font-size:12px;font-weight:bold;letter-spacing:2px}
+.hero h1{font-size:clamp(39px,6vw,68px);line-height:1.08;margin:18px 0}
+.hero p{font-size:17px;color:#edf0f7;max-width:570px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+
+.stats{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ background:var(--navy);color:white;padding:23px 7%;text-align:center
+}
+.stat strong{display:block;font-size:25px;color:#ffad6e}
+.stat span{font-size:12px;color:#dbe2f0}
+
+.tracking{
+ max-width:950px;margin:-45px auto 0;position:relative;
+ background:white;padding:27px;border-radius:10px;
+ box-shadow:0 10px 35px #172b5520
+}
+.tracking h2{color:var(--navy);font-size:23px}
+.tracking p{font-size:13px;color:var(--muted);margin:5px 0 16px}
 .track-form{display:flex;gap:10px}
-.track-form input{flex:1;min-width:0;padding:15px;border:1px solid #ddd;border-radius:5px;font-size:15px}
-.track-form button{background:var(--orange);border:0;border-radius:5px;padding:0 25px;font-weight:bold;color:var(--purple)}
+.track-form input{
+ flex:1;min-width:0;padding:15px;border:1px solid #dce1e9;
+ border-radius:5px;outline-color:var(--orange)
+}
+.track-form button{border:0;border-radius:5px;padding:0 26px;background:var(--orange);color:white;font-weight:bold}
+#trackResult{display:none;margin-top:14px;background:#fff4e9;padding:13px;border-radius:5px;font-size:13px}
+
 .section{padding:75px 7%}
 .section-title{text-align:center;margin-bottom:35px}
-.section-title h2{font-size:32px;color:var(--purple);margin-bottom:8px}
-.section-title p{color:#777}
-.services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.service{border:1px solid #eee;border-radius:9px;overflow:hidden;background:white}
-.service img{width:100%;height:190px;object-fit:cover}
-.service-content{padding:20px}
-.service h3{color:var(--purple);margin-bottom:8px}
-.service p{color:#777;font-size:14px}
-.service a{display:inline-block;margin-top:14px;color:#a85a00;font-weight:bold;font-size:13px}
-.benefits{background:var(--light)}
-.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
-.benefit{background:white;padding:25px 15px;border-radius:8px}
-.benefit .symbol{font-size:30px}
-.benefit h3{color:var(--purple);font-size:16px;margin:9px 0}
-.benefit p{font-size:13px;color:#777}
+.section-title h2{font-size:32px;color:var(--navy);line-height:1.2}
+.section-title p{color:var(--muted);margin-top:8px;font-size:14px}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:23px}
+.service{border:1px solid #e8ebf0;border-radius:10px;overflow:hidden;background:white;transition:.2s}
+.service:hover{transform:translateY(-5px);box-shadow:0 10px 25px #172b5515}
+.service img{height:205px;width:100%;object-fit:cover}
+.service-content{padding:21px}
+.service h3{color:var(--navy);margin-bottom:7px}
+.service p{font-size:13px;color:var(--muted)}
+.service a{display:inline-block;margin-top:15px;color:#d65f12;font-weight:bold;font-size:12px}
+
+.team-section{background:var(--light)}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.team-grid img{width:100%;height:350px;object-fit:cover;border-radius:10px}
+.team-copy h2{font-size:34px;color:var(--navy);line-height:1.2;margin-bottom:15px}
+.team-copy p{color:var(--muted);margin-bottom:16px;font-size:14px}
+.team-list{list-style:none}
+.team-list li{margin:10px 0;font-size:14px}
+.team-list li::before{content:"✓";color:var(--orange);font-weight:bold;margin-right:10px}
+
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.benefit{background:var(--light);border-radius:9px;padding:22px 15px;text-align:center}
+.benefit .symbol{font-size:32px}
+.benefit h3{font-size:15px;color:var(--navy);margin:9px 0}
+.benefit p{font-size:12px;color:var(--muted)}
+
+.promo{
+ background:linear-gradient(90deg,#172b55ef,#172b5590),
+ url('https://images.unsplash.com/photo-1494412519320-aa613dfb7738?w=1500') center/cover;
+ color:white;padding:65px 7%;text-align:center
+}
+.promo h2{font-size:34px;margin-bottom:10px}
+.promo p{color:#e2e8f3;margin-bottom:22px}
+
 .review-area{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.review{border:1px solid #eee;border-radius:8px;padding:24px}
-.stars{color:#e99b20;letter-spacing:3px}
-.review p{margin:12px 0;color:#666;font-size:14px}
-.review small{color:#777}
-.review-note{text-align:center;font-size:12px;color:#888;margin-top:22px}
-.cta{background:var(--purple);color:white;text-align:center;padding:65px 20px}
-.cta h2{font-size:32px;margin-bottom:12px}
-.cta p{color:#ddd;margin-bottom:23px}
+.review{border:1px solid #e7eaf0;padding:24px;border-radius:9px}
+.stars{color:#e8a126;letter-spacing:3px}
+.review h3{font-size:15px;color:var(--navy);margin-top:12px}
+.review p{font-size:13px;color:var(--muted);margin:10px 0}
+.review small{color:#8a93a2;font-size:11px}
+.review-note{text-align:center;font-size:12px;color:#777;margin-top:20px}
+
+.contact-section{background:var(--light)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px}
+.contact-card{background:white;padding:28px;border-radius:9px}
+.contact-card h3{color:var(--navy);margin-bottom:15px}
+.contact-card p{font-size:14px;color:var(--muted);margin:10px 0}
+.contact-form{display:grid;gap:12px}
+.contact-form input,.contact-form textarea,.contact-form select{
+ width:100%;padding:13px;border:1px solid #dce1e9;border-radius:5px
+}
+.contact-form textarea{min-height:110px;resize:vertical}
+
 footer{background:var(--deep);color:white;padding:50px 7% 20px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
-footer h3{margin-bottom:13px}
-footer p,footer a{color:#c5bed2;font-size:13px;display:block;margin:7px 0}
-.copyright{border-top:1px solid #ffffff20;margin-top:35px;padding-top:20px;text-align:center;color:#aaa;font-size:12px}
-#trackResult{margin-top:15px;padding:13px;background:#fff4e8;border-radius:5px;color:var(--purple);display:none;font-size:14px}
+footer h3{margin-bottom:12px;font-size:16px}
+footer p,footer a{color:#c6cfdf;font-size:13px;display:block;margin:7px 0}
+footer a:hover{color:var(--orange)}
+.copyright{border-top:1px solid #ffffff25;margin-top:30px;padding-top:18px;text-align:center;color:#aeb8ca;font-size:12px}
+
+@media(max-width:950px){
+ nav{gap:11px;font-size:11px}
+ .header-right .btn{display:none}
+}
 @media(max-width:750px){
- header{flex-wrap:wrap}
- nav{width:100%;gap:15px;overflow-x:auto;padding:5px 0;font-size:12px}
- .nav-btn{display:none}
- .hero{padding:65px 6% 75px}
- .tracking{margin:-30px 15px 0;padding:20px}
+ header{flex-wrap:wrap;padding:12px 5%}
+ .menu-toggle{display:block}
+ nav{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:14px;padding:15px 0}
+ nav.open{display:flex}
+ .header-right{margin-left:auto}
+ .language{max-width:125px;font-size:12px}
+ .hero{padding:65px 6%;min-height:480px}
+ .hero h1{font-size:43px}
+ .stats{grid-template-columns:repeat(2,1fr);gap:20px}
+ .tracking{margin:-28px 14px 0;padding:20px}
  .track-form{flex-direction:column}
  .track-form button{padding:14px}
- .services,.review-area{grid-template-columns:1fr}
- .benefit-grid{grid-template-columns:repeat(2,1fr)}
  .section{padding:55px 6%}
+ .services,.review-area{grid-template-columns:1fr}
+ .team-grid,.contact-grid{grid-template-columns:1fr}
+ .team-grid img{height:260px}
+ .benefits{grid-template-columns:repeat(2,1fr)}
  .footer-grid{grid-template-columns:1fr}
+ .promo h2{font-size:28px}
 }
 </style>
 </head>
+
 <body>
 
-<div class="topbar">SWIFTEXPRESS GLOBAL LOGISTICS — SHIPPING BEYOND BORDERS</div>
+<div class="topbar">
+ <span data-i18n="topline">SWIFTEXPRESS GLOBAL LOGISTICS — SHIPPING BEYOND BORDERS</span>
+ <span>✉ support@swiftexpress.example</span>
+</div>
 
 <header>
- <a href="#" class="logo">Swift<span>Express</span></a>
- <nav>
-  <a href="#home">Home</a>
-  <a href="#services">Our Services</a>
-  <a href="#tracking">Track Shipment</a>
-  <a href="#about">About Us</a>
-  <a href="#reviews">Reviews</a>
-  <a href="#contact">Contact</a>
+ <a href="#home" class="brand">
+  <span class="brand-icon">📦</span>
+  <span class="brand-name">Swift<span>Express</span>
+   <small>DELIVERING BEYOND BORDERS</small>
+  </span>
+ </a>
+
+ <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+ <nav id="mainNav">
+  <a href="#home" data-i18n="home">Home</a>
+  <a href="#services" data-i18n="services">Services</a>
+  <a href="#tracking" data-i18n="tracking">Track Shipment</a>
+  <a href="#about" data-i18n="about">About Us</a>
+  <a href="#reviews" data-i18n="reviews">Reviews</a>
+  <a href="#contact" data-i18n="contact">Contact</a>
  </nav>
- <a href="#tracking" class="nav-btn">Track Parcel</a>
+
+ <div class="header-right">
+  <select class="language" id="languageSelect" aria-label="Select language">
+   <option value="en">🇬🇧 English</option>
+   <option value="fr">🇫🇷 Français</option>
+   <option value="es">🇪🇸 Español</option>
+   <option value="pt">🇵🇹 Português</option>
+   <option value="ar">🇸🇦 العربية</option>
+   <option value="zh">🇨🇳 中文</option>
+   <option value="de">🇩🇪 Deutsch</option>
+   <option value="it">🇮🇹 Italiano</option>
+   <option value="ja">🇯🇵 日本語</option>
+   <option value="ko">🇰🇷 한국어</option>
+   <option value="hi">🇮🇳 हिन्दी</option>
+   <option value="ru">🇷🇺 Русский</option>
+   <option value="nl">🇳🇱 Nederlands</option>
+   <option value="tr">🇹🇷 Türkçe</option>
+   <option value="sw">🇰🇪 Kiswahili</option>
+  </select>
+ </div>
 </header>
 
 <main>
 <section class="hero" id="home">
  <div class="hero-content">
-  <div class="eyebrow">YOUR WORLDWIDE DELIVERY PARTNER</div>
-  <h1>Delivering Beyond Borders.</h1>
-  <p>From local collections to international destinations, SwiftExpress is building smarter shipping experiences with dependable logistics and transparent shipment updates.</p>
+  <div class="eyebrow" data-i18n="eyebrow">YOUR WORLDWIDE DELIVERY PARTNER</div>
+  <h1 data-i18n="headline">Delivering Beyond Borders.</h1>
+  <p data-i18n="intro">From local collections to international destinations, discover shipping solutions designed to connect people and businesses around the world.</p>
   <div class="hero-actions">
-   <a href="#tracking" class="primary">Track Your Shipment</a>
-   <a href="#services" class="secondary">Explore Services</a>
+   <a href="#tracking" class="btn" data-i18n="trackbtn">Track Your Shipment</a>
+   <a href="#services" class="btn btn-outline" data-i18n="explore">Explore Services</a>
   </div>
  </div>
 </section>
 
+<section class="stats">
+ <div class="stat"><strong>Worldwide</strong><span data-i18n="reach">Shipping ambitions</span></div>
+ <div class="stat"><strong>24/7</strong><span data-i18n="support">Online tracking access</span></div>
+ <div class="stat"><strong>15</strong><span data-i18n="languages">Language options</span></div>
+ <div class="stat"><strong>1</strong><span data-i18n="mission">Global mission</span></div>
+</section>
+
 <section class="tracking" id="tracking">
- <h2>Track Your Shipment</h2>
- <p style="font-size:14px;color:#777;margin-bottom:14px">Enter your tracking number to check your shipment status.</p>
+ <h2 data-i18n="tracktitle">Track Your Shipment</h2>
+ <p data-i18n="trackdesc">Enter your shipment reference to check its tracking status.</p>
  <form class="track-form" id="trackingForm">
   <input id="trackingNumber" type="text" placeholder="Enter your tracking number" required>
-  <button type="submit">TRACK NOW →</button>
+  <button type="submit" data-i18n="tracknow">TRACK NOW →</button>
  </form>
  <div id="trackResult" role="status"></div>
 </section>
 
 <section class="section" id="services">
  <div class="section-title">
-  <h2>Our Shipping Solutions</h2>
-  <p>Flexible logistics solutions for businesses and individuals.</p>
+  <h2 data-i18n="serviceheading">Shipping Solutions for Every Journey</h2>
+  <p data-i18n="servicedesc">Explore delivery and freight services for individuals and businesses.</p>
  </div>
+
  <div class="services">
   <article class="service">
-   <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800" alt="Parcel packages ready for delivery">
+   <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=900" alt="Packages prepared for courier delivery">
    <div class="service-content">
-    <h3>Express Parcel Delivery</h3>
-    <p>Convenient parcel shipping for urgent deliveries and everyday shipments.</p>
-    <a href="#contact">ENQUIRE NOW →</a>
+    <h3 data-i18n="express">Express Parcel Delivery</h3>
+    <p data-i18n="expressdesc">Convenient parcel shipping for urgent deliveries and everyday shipments.</p>
+    <a href="#contact" data-i18n="enquire">ENQUIRE NOW →</a>
    </div>
   </article>
+
   <article class="service">
-   <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800" alt="Commercial aircraft in flight">
+   <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900" alt="International cargo aircraft">
    <div class="service-content">
-    <h3>International Air Freight</h3>
-    <p>International shipping solutions for parcels and commercial cargo.</p>
-    <a href="#contact">ENQUIRE NOW →</a>
+    <h3 data-i18n="air">International Air Freight</h3>
+    <p data-i18n="airdesc">International transport solutions for parcels and commercial cargo.</p>
+    <a href="#contact" data-i18n="enquire">ENQUIRE NOW →</a>
    </div>
   </article>
+
   <article class="service">
-   <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800" alt="Freight truck on a highway">
+   <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=900" alt="Freight truck">
    <div class="service-content">
-    <h3>Road Freight</h3>
-    <p>Road transportation solutions for suitable domestic and regional shipments.</p>
-    <a href="#contact">ENQUIRE NOW →</a>
+    <h3 data-i18n="road">Road Freight</h3>
+    <p data-i18n="roaddesc">Road transportation for suitable domestic and regional shipments.</p>
+    <a href="#contact" data-i18n="enquire">ENQUIRE NOW →</a>
    </div>
   </article>
  </div>
 </section>
 
-<section class="section benefits" id="about">
+<section class="section team-section" id="about">
+ <div class="team-grid">
+  <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1100" alt="People preparing and receiving packages">
+  <div class="team-copy">
+   <div class="eyebrow">THE SWIFTEXPRESS EXPERIENCE</div>
+   <h2 data-i18n="teamheading">People, Packages and Possibilities.</h2>
+   <p data-i18n="teamdesc">We are building a logistics experience focused on clear communication, convenient shipping and dependable delivery partnerships.</p>
+   <ul class="team-list">
+    <li data-i18n="point1">International shipping solutions</li>
+    <li data-i18n="point2">Transparent shipment updates</li>
+    <li data-i18n="point3">Customer-focused assistance</li>
+    <li data-i18n="point4">Flexible delivery options</li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<section class="section">
  <div class="section-title">
-  <h2>Why Choose SwiftExpress?</h2>
-  <p>Shipping built around transparency, service and reliability.</p>
+  <h2 data-i18n="why">Why Choose SwiftExpress?</h2>
+  <p data-i18n="whydesc">A modern approach to shipping and customer service.</p>
  </div>
- <div class="benefit-grid">
-  <div class="benefit"><div class="symbol">🌍</div><h3>Global Reach</h3><p>International shipping through available carrier networks.</p></div>
-  <div class="benefit"><div class="symbol">📦</div><h3>Shipment Tracking</h3><p>Clear shipment updates from booking to delivery.</p></div>
-  <div class="benefit"><div class="symbol">🔒</div><h3>Parcel Care</h3><p>Shipment handling designed with parcel safety in mind.</p></div>
-  <div class="benefit"><div class="symbol">🤝</div><h3>Customer Support</h3><p>Help and information throughout the shipping process.</p></div>
+
+ <div class="benefits">
+  <div class="benefit"><div class="symbol">🌍</div><h3 data-i18n="global">Global Connections</h3><p data-i18n="globaldesc">Shipping solutions through available international networks.</p></div>
+  <div class="benefit"><div class="symbol">📍</div><h3 data-i18n="updates">Shipment Updates</h3><p data-i18n="updatesdesc">Clear information about your parcel's journey.</p></div>
+  <div class="benefit"><div class="symbol">🔐</div><h3 data-i18n="care">Parcel Care</h3><p data-i18n="caredesc">Thoughtful handling and shipment support.</p></div>
+  <div class="benefit"><div class="symbol">🤝</div><h3 data-i18n="help">Customer Support</h3><p data-i18n="helpdesc">Assistance and information when you need it.</p></div>
  </div>
+</section>
+
+<section class="promo">
+ <h2 data-i18n="promoheading">Your Next Shipment Starts Here.</h2>
+ <p data-i18n="promodesc">Contact our team to discuss your shipping requirements.</p>
+ <a href="#contact" class="btn" data-i18n="getquote">REQUEST A SHIPPING QUOTE</a>
 </section>
 
 <section class="section" id="reviews">
  <div class="section-title">
-  <h2>Customer Reviews</h2>
-  <p>Real feedback from customers who have completed shipments.</p>
+  <h2 data-i18n="reviewheading">Customer Experiences</h2>
+  <p data-i18n="reviewdesc">Customer feedback is an important part of our service.</p>
  </div>
+
  <div class="review-area">
   <article class="review">
    <div class="stars">★★★★★</div>
-   <p>Customer reviews will appear here after completed deliveries and verified feedback.</p>
-   <small>Verified customer reviews coming soon</small>
+   <h3>Sample testimonial</h3>
+   <p>"The booking process was straightforward, and I appreciated the clear communication."</p>
+   <small>Illustrative example — not an actual customer review</small>
   </article>
   <article class="review">
    <div class="stars">★★★★★</div>
-   <p>We value honest feedback about parcel handling, communication and delivery.</p>
-   <small>Verified customer reviews coming soon</small>
+   <h3>Sample testimonial</h3>
+   <p>"I value being able to get information about my shipment without unnecessary confusion."</p>
+   <small>Illustrative example — not an actual customer review</small>
   </article>
   <article class="review">
    <div class="stars">★★★★★</div>
-   <p>Every review will be linked to a completed shipment for authenticity.</p>
-   <small>Verified customer reviews coming soon</small>
+   <h3>Sample testimonial</h3>
+   <p>"A simple and welcoming shipping experience is exactly what I look for."</p>
+   <small>Illustrative example — not an actual customer review</small>
   </article>
  </div>
- <div class="review-note">We do not publish invented testimonials or ratings.</div>
+ <p class="review-note">Actual customer reviews and verified customer badges will be published after genuine completed shipments.</p>
 </section>
 
-<section class="cta">
- <h2>Ready to Ship With Us?</h2>
- <p>Talk to our team about your next shipment.</p>
- <a href="#contact" class="primary">Contact SwiftExpress</a>
+<section class="section contact-section" id="contact">
+ <div class="section-title">
+  <h2 data-i18n="contactheading">Let's Talk About Your Shipment</h2>
+  <p data-i18n="contactdesc">Send an enquiry to our customer support team.</p>
+ </div>
+
+ <div class="contact-grid">
+  <div class="contact-card">
+   <h3 data-i18n="contactus">Contact SwiftExpress</h3>
+   <p>📦 Worldwide shipping enquiries</p>
+   <p>✉ support@swiftexpress.example</p>
+   <p>🌍 International logistics enquiries</p>
+   <p style="font-size:12px">Replace the example email with your verified business email before launch.</p>
+  </div>
+  <div class="contact-card">
+   <h3 data-i18n="sendmessage">Send an Enquiry</h3>
+   <form class="contact-form" id="contactForm">
+    <input type="text" placeholder="Your full name" required>
+    <input type="email" placeholder="Your email address" required>
+    <select required>
+     <option value="">Select enquiry type</option>
+     <option>Shipment booking</option>
+     <option>Tracking assistance</option>
+     <option>International shipping</option>
+     <option>Business partnership</option>
+    </select>
+    <textarea placeholder="How can we help?" required></textarea>
+    <button class="btn" type="submit">Send Enquiry</button>
+    <p id="contactResult" role="status"></p>
+   </form>
+  </div>
+ </div>
 </section>
 </main>
 
-<footer id="contact">
+<footer>
  <div class="footer-grid">
   <div>
-   <div class="logo">Swift<span>Express</span></div>
-   <p>Worldwide shipping and logistics solutions. Connecting people and businesses through delivery services.</p>
+   <div class="brand-name" style="color:white">Swift<span style="color:var(--orange)">Express</span></div>
+   <p data-i18n="footerdesc">Delivering Beyond Borders. Your connection to worldwide shipping solutions.</p>
   </div>
   <div>
-   <h3>Quick Links</h3>
-   <a href="#home">Home</a>
-   <a href="#services">Shipping Services</a>
-   <a href="#tracking">Track Shipment</a>
-   <a href="#reviews">Customer Reviews</a>
+   <h3 data-i18n="quick">Quick Links</h3>
+   <a href="#home" data-i18n="home">Home</a>
+   <a href="#services" data-i18n="services">Services</a>
+   <a href="#tracking" data-i18n="tracking">Track Shipment</a>
+   <a href="#reviews" data-i18n="reviews">Reviews</a>
   </div>
   <div>
-   <h3>Customer Support</h3>
-   <a href="mailto:YOUR_EMAIL_HERE">Email Support</a>
-   <p>Contact details will be added after setup.</p>
+   <h3 data-i18n="supporttitle">Customer Support</h3>
+   <a href="#contact" data-i18n="contact">Contact</a>
+   <a href="#contact">Shipping enquiries</a>
+   <a href="#contact">Partnership enquiries</a>
   </div>
  </div>
  <div class="copyright">© 2026 SwiftExpress. All rights reserved.</div>
 </footer>
 
 <script>
-document.getElementById("trackingForm").addEventListener("submit",function(event){
+const translations = {
+ en:{
+  topline:"SWIFTEXPRESS GLOBAL LOGISTICS — SHIPPING BEYOND BORDERS",
+  home:"Home",services:"Services",tracking:"Track Shipment",about:"About Us",
+  reviews:"Reviews",contact:"Contact",eyebrow:"YOUR WORLDWIDE DELIVERY PARTNER",
+  headline:"Delivering Beyond Borders.",
+  intro:"From local collections to international destinations, discover shipping solutions designed to connect people and businesses around the world.",
+  trackbtn:"Track Your Shipment",explore:"Explore Services",
+  reach:"Shipping ambitions",support:"Online tracking access",
+  languages:"Language options",mission:"Global mission",
+  tracktitle:"Track Your Shipment",
+  trackdesc:"Enter your shipment reference to check its tracking status.",
+  tracknow:"TRACK NOW →",
+  serviceheading:"Shipping Solutions for Every Journey",
+  servicedesc:"Explore delivery and freight services for individuals and businesses.",
+  express:"Express Parcel Delivery",
+  expressdesc:"Convenient parcel shipping for urgent deliveries and everyday shipments.",
+  air:"International Air Freight",
+  airdesc:"International transport solutions for parcels and commercial cargo.",
+  road:"Road Freight",
+  roaddesc:"Road transportation for suitable domestic and regional shipments.",
+  enquire:"ENQUIRE NOW →",
+  teamheading:"People, Packages and Possibilities.",
+  teamdesc:"We are building a logistics experience focused on clear communication, convenient shipping and dependable delivery partnerships.",
+  point1:"International shipping solutions",
+  point2:"Transparent shipment updates",
+  point3:"Customer-focused assistance",
+  point4:"Flexible delivery options",
+  why:"Why Choose SwiftExpress?",
+  whydesc:"A modern approach to shipping and customer service.",
+  global:"Global Connections",
+  globaldesc:"Shipping solutions through available international networks.",
+  updates:"Shipment Updates",updatesdesc:"Clear information about your parcel's journey.",
+  care:"Parcel Care",caredesc:"Thoughtful handling and shipment support.",
+  help:"Customer Support",helpdesc:"Assistance and information when you need it.",
+  promoheading:"Your Next Shipment Starts Here.",
+  promodesc:"Contact our team to discuss your shipping requirements.",
+  getquote:"REQUEST A SHIPPING QUOTE",
+  reviewheading:"Customer Experiences",
+  reviewdesc:"Customer feedback is an important part of our service.",
+  contactheading:"Let's Talk About Your Shipment",
+  contactdesc:"Send an enquiry to our customer support team.",
+  contactus:"Contact SwiftExpress",sendmessage:"Send an Enquiry",
+  footerdesc:"Delivering Beyond Borders. Your connection to worldwide shipping solutions.",
+  quick:"Quick Links",supporttitle:"Customer Support"
+ },
+ fr:{
+  topline:"SWIFTEXPRESS LOGISTIQUE MONDIALE — LIVRER AU-DELÀ DES FRONTIÈRES",
+  home:"Accueil",services:"Services",tracking:"Suivre un colis",about:"À propos",
+  reviews:"Avis",contact:"Contact",eyebrow:"VOTRE PARTENAIRE DE LIVRAISON MONDIAL",
+  headline:"Livrer au-delà des frontières.",
+  intro:"Découvrez des solutions d'expédition reliant les personnes et les entreprises dans le monde entier.",
+  trackbtn:"Suivre votre colis",explore:"Découvrir les services",
+  tracktitle:"Suivre votre colis",trackdesc:"Saisissez votre numéro de suivi.",
+  tracknow:"SUIVRE →",serviceheading:"Des solutions pour chaque livraison",
+  servicedesc:"Découvrez nos solutions de transport.",
+  express:"Livraison express",expressdesc:"Expédition pratique pour vos colis.",
+  air:"Fret aérien international",airdesc:"Transport international de colis et de marchandises.",
+  road:"Transport routier",roaddesc:"Transport routier national et régional.",
+  enquire:"EN SAVOIR PLUS →",teamheading:"Des personnes, des colis et des possibilités.",
+  teamdesc:"Nous développons une expérience logistique axée sur la communication et le service.",
+  point1:"Solutions d'expédition internationale",point2:"Informations transparentes",
+  point3:"Assistance clientèle",point4:"Options de livraison flexibles",
+  why:"Pourquoi choisir SwiftExpress ?",whydesc:"Une approche moderne du transport.",
+  global:"Connexions mondiales",globaldesc:"Solutions via des réseaux internationaux.",
+  updates:"Suivi des colis",updatesdesc:"Informations sur le parcours de votre colis.",
+  care:"Soin des colis",caredesc:"Une attention particulière à vos envois.",
+  help:"Service client",helpdesc:"Assistance quand vous en avez besoin.",
+  promoheading:"Votre prochain envoi commence ici.",
+  promodesc:"Contactez notre équipe pour vos besoins d'expédition.",
+  getquote:"DEMANDER UN DEVIS",reviewheading:"Expériences clients",
+  reviewdesc:"Les avis des clients sont importants.",
+  contactheading:"Parlons de votre envoi",
+  contactdesc:"Envoyez une demande à notre équipe.",
+  contactus:"Contacter SwiftExpress",sendmessage:"Envoyer une demande",
+  footerdesc:"Livrer au-delà des frontières.",quick:"Liens rapides",
+  supporttitle:"Service client"
+ },
+ es:{
+  topline:"SWIFTEXPRESS LOGÍSTICA GLOBAL — ENVIAMOS MÁS ALLÁ DE LAS FRONTERAS",
+  home:"Inicio",services:"Servicios",tracking:"Rastrear envío",about:"Nosotros",
+  reviews:"Opiniones",contact:"Contacto",eyebrow:"TU SOCIO DE ENVÍOS MUNDIALES",
+  headline:"Entregando más allá de las fronteras.",
+  intro:"Descubre soluciones de envío que conectan personas y empresas en todo el mundo.",
+  trackbtn:"Rastrear envío",explore:"Ver servicios",
+  tracktitle:"Rastrear tu envío",trackdesc:"Introduce tu número de seguimiento.",
+  tracknow:"RASTREAR →",serviceheading:"Soluciones de envío para cada viaje",
+  servicedesc:"Servicios de transporte para personas y empresas.",
+  express:"Entrega urgente",expressdesc:"Envío cómodo de paquetes.",
+  air:"Transporte aéreo internacional",airdesc:"Transporte internacional de paquetes y mercancías.",
+  road:"Transporte por carretera",roaddesc:"Transporte nacional y regional.",
+  enquire:"CONSULTAR →",teamheading:"Personas, paquetes y posibilidades.",
+  teamdesc:"Creamos una experiencia logística centrada en la comunicación y el servicio.",
+  point1:"Soluciones internacionales",point2:"Actualizaciones transparentes",
+  point3:"Atención al cliente",point4:"Opciones de entrega flexibles",
+  why:"¿Por qué elegir SwiftExpress?",whydesc:"Un enfoque moderno del transporte.",
+  global:"Conexiones globales",globaldesc:"Soluciones mediante redes internacionales.",
+  updates:"Actualizaciones",updatesdesc:"Información sobre el recorrido de tu paquete.",
+  care:"Cuidado del paquete",caredesc:"Atención a tus envíos.",
+  help:"Atención al cliente",helpdesc:"Ayuda cuando la necesites.",
+  promoheading:"Tu próximo envío comienza aquí.",
+  promodesc:"Contacta con nuestro equipo.",
+  getquote:"SOLICITAR PRESUPUESTO",reviewheading:"Experiencias de clientes",
+  reviewdesc:"Los comentarios de los clientes son importantes.",
+  contactheading:"Hablemos de tu envío",
+  contactdesc:"Envía una consulta a nuestro equipo.",
+  contactus:"Contactar con SwiftExpress",sendmessage:"Enviar consulta",
+  footerdesc:"Entregando más allá de las fronteras.",quick:"Enlaces rápidos",
+  supporttitle:"Atención al cliente"
+ },
+ pt:{
+  home:"Início",services:"Serviços",tracking:"Rastrear envio",about:"Sobre nós",
+  reviews:"Avaliações",contact:"Contacto",eyebrow:"O SEU PARCEIRO DE ENTREGA MUNDIAL",
+  headline:"Entregando além das fronteiras.",
+  intro:"Descubra soluções de envio que ligam pessoas e empresas em todo o mundo.",
+  trackbtn:"Rastrear envio",explore:"Explorar serviços",
+  tracktitle:"Rastrear o seu envio",trackdesc:"Introduza o número de rastreamento.",
+  tracknow:"RASTREAR →",serviceheading:"Soluções de envio para cada viagem",
+  servicedesc:"Serviços de transporte para pessoas e empresas.",
+  express:"Entrega expressa",expressdesc:"Envio conveniente de encomendas.",
+  air:"Frete aéreo internacional",airdesc:"Transporte internacional de encomendas e cargas.",
+  road:"Transporte rodoviário",roaddesc:"Transporte nacional e regional.",
+  enquire:"CONSULTAR →",teamheading:"Pessoas, encomendas e possibilidades.",
+  teamdesc:"Criamos uma experiência logística focada na comunicação e no serviço.",
+  point1:"Soluções internacionais",point2:"Atualizações transparentes",
+  point3:"Apoio ao cliente",point4:"Opções de entrega flexíveis",
+  why:"Porquê escolher a SwiftExpress?",
+  whydesc:"Uma abordagem moderna ao transporte.",
+  global:"Ligações globais",globaldesc:"Soluções através de redes internacionais.",
+  updates:"Atualizações de envio",updatesdesc:"Informações sobre a viagem da encomenda.",
+  care:"Cuidado com a encomenda",caredesc:"Atenção às suas encomendas.",
+  help:"Apoio ao cliente",helpdesc:"Ajuda quando precisar.",
+  promoheading:"O seu próximo envio começa aqui.",
+  promodesc:"Contacte a nossa equipa.",
+  getquote:"PEDIR UM ORÇAMENTO",reviewheading:"Experiências dos clientes",
+  reviewdesc:"A opinião dos clientes é importante.",
+  contactheading:"Vamos falar sobre o seu envio",
+  contactdesc:"Envie uma consulta à nossa equipa.",
+  contactus:"Contactar SwiftExpress",sendmessage:"Enviar consulta",
+  footerdesc:"Entregando além das fronteiras.",quick:"Ligações rápidas",
+  supporttitle:"Apoio ao cliente"
+ },
+ de:{
+  home:"Startseite",services:"Dienstleistungen",tracking:"Sendung verfolgen",
+  about:"Über uns",reviews:"Bewertungen",contact:"Kontakt",
+  eyebrow:"IHR WELTWEITER LIEFERPARTNER",
+  headline:"Lieferungen über Grenzen hinaus.",
+  intro:"Entdecken Sie Versandlösungen für Menschen und Unternehmen weltweit.",
+  trackbtn:"Sendung verfolgen",explore:"Dienstleistungen entdecken",
+  tracktitle:"Sendung verfolgen",trackdesc:"Geben Sie Ihre Sendungsnummer ein.",
+  tracknow:"JETZT VERFOLGEN →",
+  serviceheading:"Versandlösungen für jede Reise",
+  servicedesc:"Transportlösungen für Privatpersonen und Unternehmen.",
+  express:"Express-Paketlieferung",expressdesc:"Bequemer Paketversand.",
+  air:"Internationaler Luftfrachtverkehr",airdesc:"Internationaler Transport von Paketen und Fracht.",
+  road:"Straßentransport",roaddesc:"Nationale und regionale Transporte.",
+  enquire:"JETZT ANFRAGEN →",
+  teamheading:"Menschen, Pakete und Möglichkeiten.",
+  teamdesc:"Wir entwickeln ein Logistikerlebnis mit Fokus auf Kommunikation und Service.",
+  point1:"Internationale Versandlösungen",point2:"Transparente Updates",
+  point3:"Kundenbetreuung",point4:"Flexible Lieferoptionen",
+  why:"Warum SwiftExpress wählen?",whydesc:"Ein moderner Ansatz für den Versand.",
+  global:"Globale Verbindungen",globaldesc:"Lösungen über internationale Netzwerke.",
+  updates:"Sendungsupdates",updatesdesc:"Informationen über den Versandweg.",
+  care:"Paketschutz",caredesc:"Sorgfältige Unterstützung Ihrer Sendung.",
+  help:"Kundendienst",helpdesc:"Hilfe, wenn Sie sie brauchen.",
+  promoheading:"Ihre nächste Sendung beginnt hier.",
+  promodesc:"Kontaktieren Sie unser Team.",
+  getquote:"VERSANDANGEBOT ANFORDERN",
+  reviewheading:"Kundenerfahrungen",reviewdesc:"Kundenfeedback ist uns wichtig.",
+  contactheading:"Sprechen wir über Ihre Sendung",
+  contactdesc:"Senden Sie eine Anfrage an unser Team.",
+  contactus:"SwiftExpress kontaktieren",sendmessage:"Anfrage senden",
+  footerdesc:"Lieferungen über Grenzen hinaus.",quick:"Direktlinks",
+  supporttitle:"Kundendienst"
+ },
+ it:{
+  home:"Home",services:"Servizi",tracking:"Traccia spedizione",about:"Chi siamo",
+  reviews:"Recensioni",contact:"Contatti",
+  headline:"Consegniamo oltre i confini.",trackbtn:"Traccia la spedizione",
+  explore:"Scopri i servizi",tracktitle:"Traccia la tua spedizione",
+  trackdesc:"Inserisci il numero di tracciamento.",tracknow:"TRACCIA →",
+  serviceheading:"Soluzioni di spedizione per ogni viaggio",
+  servicedesc:"Servizi di trasporto per privati e aziende.",
+  express:"Consegna express",expressdesc:"Spedizione pratica di pacchi.",
+  air:"Trasporto aereo internazionale",airdesc:"Trasporto internazionale di pacchi e merci.",
+  road:"Trasporto su strada",roaddesc:"Trasporto nazionale e regionale.",
+  enquire:"RICHIEDI INFORMAZIONI →",why:"Perché scegliere SwiftExpress?",
+  global:"Connessioni globali",updates:"Aggiornamenti spedizione",
+  care:"Cura dei pacchi",help:"Assistenza clienti",
+  promoheading:"La tua prossima spedizione inizia qui.",
+  getquote:"RICHIEDI UN PREVENTIVO",
+  reviewheading:"Esperienze dei clienti",
+  contactheading:"Parliamo della tua spedizione",
+  contactus:"Contatta SwiftExpress",sendmessage:"Invia richiesta",
+  quick:"Link rapidi",supporttitle:"Assistenza clienti"
+ },
+ ja:{
+  home:"ホーム",services:"サービス",tracking:"荷物を追跡",
+  about:"会社概要",reviews:"レビュー",contact:"お問い合わせ",
+  headline:"国境を越えてお届けします。",trackbtn:"荷物を追跡",
+  explore:"サービスを見る",tracktitle:"配送状況を確認",
+  trackdesc:"追跡番号を入力してください。",tracknow:"追跡する →",
+  serviceheading:"あらゆる配送に対応するサービス",
+  express:"速達小包配送",air:"国際航空貨物",road:"陸上輸送",
+  why:"SwiftExpressを選ぶ理由",
+  promoheading:"次の配送はこちらから。",
+  getquote:"見積もりを依頼",
+  reviewheading:"お客様の声",contactheading:"配送についてお問い合わせ",
+  contactus:"SwiftExpressに連絡",sendmessage:"お問い合わせを送信",
+  quick:"クイックリンク",supporttitle:"カスタマーサポート"
+ },
+ ko:{
+  home:"홈",services:"서비스",tracking:"배송 조회",about:"회사 소개",
+  reviews:"고객 후기",contact:"문의하기",
+  headline:"국경을 넘어 배송합니다.",trackbtn:"배송 조회",
+  explore:"서비스 보기",tracktitle:"배송 추적",
+  trackdesc:"운송장 번호를 입력하세요.",tracknow:"조회하기 →",
+  serviceheading:"모든 배송을 위한 솔루션",
+  express:"특급 소포 배송",air:"국제 항공 화물",road:"육상 운송",
+  why:"SwiftExpress를 선택하는 이유",
+  promoheading:"다음 배송을 시작하세요.",
+  getquote:"배송 견적 요청",reviewheading:"고객 경험",
+  contactheading:"배송에 대해 문의하세요",
+  contactus:"SwiftExpress 문의",sendmessage:"문의 보내기",
+  quick:"빠른 링크",supporttitle:"고객 지원"
+ },
+ hi:{
+  home:"होम",services:"सेवाएँ",tracking:"शिपमेंट ट्रैक करें",
+  about:"हमारे बारे में",reviews:"समीक्षाएँ",contact:"संपर्क",
+  headline:"सीमाओं के पार डिलीवरी।",trackbtn:"शिपमेंट ट्रैक करें",
+  explore:"सेवाएँ देखें",tracktitle:"अपना शिपमेंट ट्रैक करें",
+  trackdesc:"अपना ट्रैकिंग नंबर दर्ज करें।",tracknow:"ट्रैक करें →",
+  serviceheading:"हर यात्रा के लिए शिपिंग समाधान",
+  express:"एक्सप्रेस पार्सल डिलीवरी",air:"अंतरराष्ट्रीय एयर फ्रेट",
+  road:"सड़क परिवहन",why:"SwiftExpress क्यों चुनें?",
+  promoheading:"आपकी अगली शिपमेंट यहाँ से शुरू होती है।",
+  getquote:"शिपिंग मूल्य पूछें",reviewheading:"ग्राहक अनुभव",
+  contactheading:"अपनी शिपमेंट के बारे में बात करें",
+  contactus:"SwiftExpress से संपर्क करें",sendmessage:"पूछताछ भेजें",
+  quick:"त्वरित लिंक",supporttitle:"ग्राहक सहायता"
+ },
+ ru:{
+  home:"Главная",services:"Услуги",tracking:"Отследить отправление",
+  about:"О компании",reviews:"Отзывы",contact:"Контакты",
+  headline:"Доставка без границ.",trackbtn:"Отследить отправление",
+  explore:"Наши услуги",tracktitle:"Отследить отправление",
+  trackdesc:"Введите номер отслеживания.",tracknow:"ОТСЛЕДИТЬ →",
+  serviceheading:"Решения для каждой доставки",
+  express:"Экспресс-доставка посылок",
+  air:"Международные авиаперевозки",road:"Автомобильные перевозки",
+  why:"Почему SwiftExpress?",promoheading:"Начните следующую отправку здесь.",
+  getquote:"ЗАПРОСИТЬ РАСЧЁТ",reviewheading:"Отзывы клиентов",
+  contactheading:"Обсудим вашу отправку",
+  contactus:"Связаться со SwiftExpress",sendmessage:"Отправить запрос",
+  quick:"Быстрые ссылки",supporttitle:"Поддержка клиентов"
+ },
+ nl:{
+  home:"Home",services:"Diensten",tracking:"Zending volgen",
+  about:"Over ons",reviews:"Beoordelingen",contact:"Contact",
+  headline:"Bezorging zonder grenzen.",trackbtn:"Volg je zending",
+  explore:"Bekijk diensten",tracktitle:"Volg je zending",
+  trackdesc:"Voer je trackingnummer in.",tracknow:"VOLGEN →",
+  serviceheading:"Verzendoplossingen voor elke reis",
+  express:"Express pakketbezorging",air:"Internationaal luchtvracht",
+  road:"Wegtransport",why:"Waarom SwiftExpress?",
+  promoheading:"Je volgende zending begint hier.",
+  getquote:"VERZENDOFFERT AANVRAGEN",
+  reviewheading:"Klantervaringen",contactheading:"Laten we over je zending praten",
+  contactus:"Contact met SwiftExpress",sendmessage:"Verstuur aanvraag",
+  quick:"Snelle links",supporttitle:"Klantenservice"
+ },
+ tr:{
+  home:"Ana Sayfa",services:"Hizmetler",tracking:"Gönderi Takibi",
+  about:"Hakkımızda",reviews:"Yorumlar",contact:"İletişim",
+  headline:"Sınırların ötesine teslimat.",trackbtn:"Gönderiyi Takip Et",
+  explore:"Hizmetleri Keşfet",tracktitle:"Gönderinizi Takip Edin",
+  trackdesc:"Takip numaranızı girin.",tracknow:"ŞİMDİ TAKİP ET →",
+  serviceheading:"Her Yolculuk İçin Gönderi Çözümleri",
+  express:"Ekspres Paket Teslimatı",air:"Uluslararası Hava Kargo",
+  road:"Karayolu Taşımacılığı",why:"Neden SwiftExpress?",
+  promoheading:"Bir sonraki gönderiniz burada başlıyor.",
+  getquote:"FİYAT TEKLİFİ İSTE",
+  reviewheading:"Müşteri Deneyimleri",
+  contactheading:"Gönderiniz hakkında konuşalım",
+  contactus:"SwiftExpress ile iletişim",sendmessage:"Talep gönder",
+  quick:"Hızlı Bağlantılar",supporttitle:"Müşteri Desteği"
+ },
+ sw:{
+  home:"Nyumbani",services:"Huduma",tracking:"Fuatilia mzigo",
+  about:"Kuhusu sisi",reviews:"Maoni",contact:"Wasiliana",
+  headline:"Tunafikisha mizigo kuvuka mipaka.",trackbtn:"Fuatilia mzigo",
+  explore:"Angalia huduma",tracktitle:"Fuatilia mzigo wako",
+  trackdesc:"Weka nambari yako ya ufuatiliaji.",tracknow:"FUATILIA →",
+  serviceheading:"Suluhisho za usafirishaji kwa kila safari",
+  express:"Uwasilishaji wa haraka",air:"Usafirishaji wa anga wa kimataifa",
+  road:"Usafirishaji wa barabara",why:"Kwa nini uchague SwiftExpress?",
+  promoheading:"Safari yako inayofuata inaanza hapa.",
+  getquote:"OMBA MAKADIRIO",reviewheading:"Uzoefu wa wateja",
+  contactheading:"Tuongee kuhusu mzigo wako",
+  contactus:"Wasiliana na SwiftExpress",sendmessage:"Tuma ujumbe",
+  quick:"Viungo vya haraka",supporttitle:"Huduma kwa wateja"
+ },
+ zh:{
+  home:"首页",services:"服务",tracking:"追踪包裹",about:"关于我们",
+  reviews:"客户评价",contact:"联系我们",
+  headline:"跨越边界，准时送达。",trackbtn:"追踪您的包裹",
+  explore:"探索服务",tracktitle:"追踪您的包裹",
+  trackdesc:"请输入您的追踪号码。",tracknow:"立即追踪 →",
+  serviceheading:"满足每一次运输需求",
+  express:"快递包裹配送",air:"国际航空货运",road:"公路货运",
+  why:"为什么选择 SwiftExpress？",
+  promoheading:"您的下一次寄送从这里开始。",
+  getquote:"获取运输报价",reviewheading:"客户体验",
+  contactheading:"联系我们讨论您的运输需求",
+  contactus:"联系 SwiftExpress",sendmessage:"发送咨询",
+  quick:"快速链接",supporttitle:"客户支持"
+ },
+ ar:{
+  home:"الرئيسية",services:"الخدمات",tracking:"تتبع الشحنة",
+  about:"من نحن",reviews:"التقييمات",contact:"اتصل بنا",
+  headline:"توصيل يتجاوز الحدود.",
+  trackbtn:"تتبع شحنتك",explore:"اكتشف الخدمات",
+  tracktitle:"تتبع شحنتك",trackdesc:"أدخل رقم التتبع الخاص بك.",
+  tracknow:"تتبع الآن ←",serviceheading:"حلول شحن لكل رحلة",
+  express:"توصيل الطرود السريع",air:"الشحن الجوي الدولي",
+  road:"الشحن البري",why:"لماذا تختار SwiftExpress؟",
+  promoheading:"شُحنتك القادمة تبدأ من هنا.",
+  getquote:"اطلب عرض سعر",reviewheading:"تجارب العملاء",
+  contactheading:"لنتحدث عن شحنتك",
+  contactus:"اتصل بـ SwiftExpress",sendmessage:"إرسال استفسار",
+  quick:"روابط سريعة",supporttitle:"دعم العملاء"
+ }
+};
+
+const languageSelect=document.getElementById("languageSelect");
+
+function setLanguage(lang){
+ const dictionary=translations[lang]||translations.en;
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+ document.querySelectorAll("[data-i18n]").forEach(element=>{
+  const key=element.dataset.i18n;
+  if(dictionary[key]) element.textContent=dictionary[key];
+ });
+
+ localStorage.setItem("swiftLanguage",lang);
+}
+
+languageSelect.addEventListener("change",event=>{
+ setLanguage(event.target.value);
+});
+
+const savedLanguage=localStorage.getItem("swiftLanguage")||"en";
+languageSelect.value=savedLanguage;
+setLanguage(savedLanguage);
+
+document.getElementById("menuToggle").addEventListener("click",()=>{
+ document.getElementById("mainNav").classList.toggle("open");
+});
+
+document.querySelectorAll("#mainNav a").forEach(link=>{
+ link.addEventListener("click",()=>{
+  document.getElementById("mainNav").classList.remove("open");
+ });
+});
+
+document.getElementById("trackingForm").addEventListener("submit",event=>{
  event.preventDefault();
  const number=document.getElementById("trackingNumber").value.trim();
  const result=document.getElementById("trackResult");
  result.style.display="block";
- result.textContent="Tracking lookup for "+number+" is not connected yet. Please connect the official SwiftExpress tracking system before using live shipment data.";
+ result.textContent="Tracking system setup is in progress. This website is not yet connected to live shipment records. Please contact SwiftExpress support for assistance.";
+});
+
+document.getElementById("contactForm").addEventListener("submit",event=>{
+ event.preventDefault();
+ document.getElementById("contactResult").textContent=
+ "Thank you. The enquiry form needs a secure backend connection before messages can be received. Please contact the company directly for now.";
 });
 </script>
+
 </body>
-     </html>
-     
+</html>
