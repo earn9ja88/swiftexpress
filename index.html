@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#24134a">
+<title>SwiftExpress | Worldwide Shipping & Logistics</title>
+<meta name="description" content="SwiftExpress international shipping, courier and logistics services. Track your shipment worldwide.">
+<style>
+:root {
+  --purple:#24134a;
+  --deep:#170d31;
+  --orange:#ff902e;
+  --light:#f7f6fa;
+  --text:#242137;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.6;background:white}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font:inherit}
+.topbar{background:var(--deep);color:white;text-align:center;padding:9px;font-size:12px}
+header{background:var(--purple);color:white;padding:17px 6%;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:25px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--orange)}
+nav{display:flex;gap:25px;align-items:center;font-size:14px}
+nav a:hover{color:var(--orange)}
+.nav-btn,.primary{background:var(--orange);color:#24134a;border:0;padding:12px 20px;border-radius:5px;font-weight:bold}
+.hero{background:linear-gradient(90deg,rgba(23,13,49,.96),rgba(23,13,49,.72)),url('https://images.unsplash.com/photo-1494412519320-aa613dfb7738?w=1800') center/cover;color:white;padding:85px 7% 95px}
+.hero-content{max-width:650px}
+.eyebrow{color:var(--orange);font-size:13px;font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.12;margin:18px 0}
+.hero p{color:#e0dbea;font-size:17px;max-width:560px}
+.hero-actions{display:flex;gap:13px;margin-top:27px;flex-wrap:wrap}
+.secondary{border:1px solid white;background:transparent;color:white;padding:12px 20px;border-radius:5px}
+.tracking{background:white;padding:28px;border-radius:9px;max-width:850px;margin:-42px auto 0;position:relative;box-shadow:0 8px 35px #00000015}
+.tracking h2{color:var(--purple);font-size:22px;margin-bottom:12px}
+.track-form{display:flex;gap:10px}
+.track-form input{flex:1;min-width:0;padding:15px;border:1px solid #ddd;border-radius:5px;font-size:15px}
+.track-form button{background:var(--orange);border:0;border-radius:5px;padding:0 25px;font-weight:bold;color:var(--purple)}
+.section{padding:75px 7%}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title h2{font-size:32px;color:var(--purple);margin-bottom:8px}
+.section-title p{color:#777}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.service{border:1px solid #eee;border-radius:9px;overflow:hidden;background:white}
+.service img{width:100%;height:190px;object-fit:cover}
+.service-content{padding:20px}
+.service h3{color:var(--purple);margin-bottom:8px}
+.service p{color:#777;font-size:14px}
+.service a{display:inline-block;margin-top:14px;color:#a85a00;font-weight:bold;font-size:13px}
+.benefits{background:var(--light)}
+.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.benefit{background:white;padding:25px 15px;border-radius:8px}
+.benefit .symbol{font-size:30px}
+.benefit h3{color:var(--purple);font-size:16px;margin:9px 0}
+.benefit p{font-size:13px;color:#777}
+.review-area{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{border:1px solid #eee;border-radius:8px;padding:24px}
+.stars{color:#e99b20;letter-spacing:3px}
+.review p{margin:12px 0;color:#666;font-size:14px}
+.review small{color:#777}
+.review-note{text-align:center;font-size:12px;color:#888;margin-top:22px}
+.cta{background:var(--purple);color:white;text-align:center;padding:65px 20px}
+.cta h2{font-size:32px;margin-bottom:12px}
+.cta p{color:#ddd;margin-bottom:23px}
+footer{background:var(--deep);color:white;padding:50px 7% 20px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}
+footer h3{margin-bottom:13px}
+footer p,footer a{color:#c5bed2;font-size:13px;display:block;margin:7px 0}
+.copyright{border-top:1px solid #ffffff20;margin-top:35px;padding-top:20px;text-align:center;color:#aaa;font-size:12px}
+#trackResult{margin-top:15px;padding:13px;background:#fff4e8;border-radius:5px;color:var(--purple);display:none;font-size:14px}
+@media(max-width:750px){
+ header{flex-wrap:wrap}
+ nav{width:100%;gap:15px;overflow-x:auto;padding:5px 0;font-size:12px}
+ .nav-btn{display:none}
+ .hero{padding:65px 6% 75px}
+ .tracking{margin:-30px 15px 0;padding:20px}
+ .track-form{flex-direction:column}
+ .track-form button{padding:14px}
+ .services,.review-area{grid-template-columns:1fr}
+ .benefit-grid{grid-template-columns:repeat(2,1fr)}
+ .section{padding:55px 6%}
+ .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">SWIFTEXPRESS GLOBAL LOGISTICS — SHIPPING BEYOND BORDERS</div>
+
+<header>
+ <a href="#" class="logo">Swift<span>Express</span></a>
+ <nav>
+  <a href="#home">Home</a>
+  <a href="#services">Our Services</a>
+  <a href="#tracking">Track Shipment</a>
+  <a href="#about">About Us</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#contact">Contact</a>
+ </nav>
+ <a href="#tracking" class="nav-btn">Track Parcel</a>
+</header>
+
+<main>
+<section class="hero" id="home">
+ <div class="hero-content">
+  <div class="eyebrow">YOUR WORLDWIDE DELIVERY PARTNER</div>
+  <h1>Delivering Beyond Borders.</h1>
+  <p>From local collections to international destinations, SwiftExpress is building smarter shipping experiences with dependable logistics and transparent shipment updates.</p>
+  <div class="hero-actions">
+   <a href="#tracking" class="primary">Track Your Shipment</a>
+   <a href="#services" class="secondary">Explore Services</a>
+  </div>
+ </div>
+</section>
+
+<section class="tracking" id="tracking">
+ <h2>Track Your Shipment</h2>
+ <p style="font-size:14px;color:#777;margin-bottom:14px">Enter your tracking number to check your shipment status.</p>
+ <form class="track-form" id="trackingForm">
+  <input id="trackingNumber" type="text" placeholder="Enter your tracking number" required>
+  <button type="submit">TRACK NOW →</button>
+ </form>
+ <div id="trackResult" role="status"></div>
+</section>
+
+<section class="section" id="services">
+ <div class="section-title">
+  <h2>Our Shipping Solutions</h2>
+  <p>Flexible logistics solutions for businesses and individuals.</p>
+ </div>
+ <div class="services">
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800" alt="Parcel packages ready for delivery">
+   <div class="service-content">
+    <h3>Express Parcel Delivery</h3>
+    <p>Convenient parcel shipping for urgent deliveries and everyday shipments.</p>
+    <a href="#contact">ENQUIRE NOW →</a>
+   </div>
+  </article>
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800" alt="Commercial aircraft in flight">
+   <div class="service-content">
+    <h3>International Air Freight</h3>
+    <p>International shipping solutions for parcels and commercial cargo.</p>
+    <a href="#contact">ENQUIRE NOW →</a>
+   </div>
+  </article>
+  <article class="service">
+   <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800" alt="Freight truck on a highway">
+   <div class="service-content">
+    <h3>Road Freight</h3>
+    <p>Road transportation solutions for suitable domestic and regional shipments.</p>
+    <a href="#contact">ENQUIRE NOW →</a>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section class="section benefits" id="about">
+ <div class="section-title">
+  <h2>Why Choose SwiftExpress?</h2>
+  <p>Shipping built around transparency, service and reliability.</p>
+ </div>
+ <div class="benefit-grid">
+  <div class="benefit"><div class="symbol">🌍</div><h3>Global Reach</h3><p>International shipping through available carrier networks.</p></div>
+  <div class="benefit"><div class="symbol">📦</div><h3>Shipment Tracking</h3><p>Clear shipment updates from booking to delivery.</p></div>
+  <div class="benefit"><div class="symbol">🔒</div><h3>Parcel Care</h3><p>Shipment handling designed with parcel safety in mind.</p></div>
+  <div class="benefit"><div class="symbol">🤝</div><h3>Customer Support</h3><p>Help and information throughout the shipping process.</p></div>
+ </div>
+</section>
+
+<section class="section" id="reviews">
+ <div class="section-title">
+  <h2>Customer Reviews</h2>
+  <p>Real feedback from customers who have completed shipments.</p>
+ </div>
+ <div class="review-area">
+  <article class="review">
+   <div class="stars">★★★★★</div>
+   <p>Customer reviews will appear here after completed deliveries and verified feedback.</p>
+   <small>Verified customer reviews coming soon</small>
+  </article>
+  <article class="review">
+   <div class="stars">★★★★★</div>
+   <p>We value honest feedback about parcel handling, communication and delivery.</p>
+   <small>Verified customer reviews coming soon</small>
+  </article>
+  <article class="review">
+   <div class="stars">★★★★★</div>
+   <p>Every review will be linked to a completed shipment for authenticity.</p>
+   <small>Verified customer reviews coming soon</small>
+  </article>
+ </div>
+ <div class="review-note">We do not publish invented testimonials or ratings.</div>
+</section>
+
+<section class="cta">
+ <h2>Ready to Ship With Us?</h2>
+ <p>Talk to our team about your next shipment.</p>
+ <a href="#contact" class="primary">Contact SwiftExpress</a>
+</section>
+</main>
+
+<footer id="contact">
+ <div class="footer-grid">
+  <div>
+   <div class="logo">Swift<span>Express</span></div>
+   <p>Worldwide shipping and logistics solutions. Connecting people and businesses through delivery services.</p>
+  </div>
+  <div>
+   <h3>Quick Links</h3>
+   <a href="#home">Home</a>
+   <a href="#services">Shipping Services</a>
+   <a href="#tracking">Track Shipment</a>
+   <a href="#reviews">Customer Reviews</a>
+  </div>
+  <div>
+   <h3>Customer Support</h3>
+   <a href="mailto:YOUR_EMAIL_HERE">Email Support</a>
+   <p>Contact details will be added after setup.</p>
+  </div>
+ </div>
+ <div class="copyright">© 2026 SwiftExpress. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById("trackingForm").addEventListener("submit",function(event){
+ event.preventDefault();
+ const number=document.getElementById("trackingNumber").value.trim();
+ const result=document.getElementById("trackResult");
+ result.style.display="block";
+ result.textContent="Tracking lookup for "+number+" is not connected yet. Please connect the official SwiftExpress tracking system before using live shipment data.";
+});
+</script>
+</body>
+     </html>
+     
