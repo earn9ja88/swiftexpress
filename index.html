@@ -29,17 +29,35 @@ h1{font-size:clamp(42px,5vw,66px);line-height:.99;letter-spacing:-2.7px;color:va
 .service-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.card{border:1px solid #e3e8f3;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px #08245b0d;background:#fff}.card img{width:100%;height:190px;object-fit:cover;display:block}.card-content{padding:20px}.card h3{margin:0 0 8px;color:var(--navy)}.card p{color:var(--muted);line-height:1.55;margin:0 0 15px}.text-link{color:var(--orange);font-weight:900}
 .about{background:var(--pale);display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}.about img{width:100%;height:360px;object-fit:cover;border-radius:18px}.about h2{font-size:36px;color:var(--navy);margin:10px 0}.about p{line-height:1.7;color:var(--muted)}.ticks{padding:0;list-style:none;display:grid;gap:12px;font-weight:700}.ticks li:before{content:'✓';color:#159447;font-weight:900;margin-right:10px}
 .reviews{background:#f0f3ff}.review-note{text-align:center;color:var(--muted);font-size:14px}.review-panel{max-width:760px;margin:auto;background:#fff;border:1px solid #dfe5f2;border-radius:15px;padding:28px;text-align:center;box-shadow:0 8px 24px #08245b0d}.review-panel .stars{color:#f59e0b;font-size:25px;letter-spacing:3px}.review-panel h3{color:var(--navy);margin:10px}.review-panel p{color:var(--muted);line-height:1.6}
-.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:35px}.contact-box{background:var(--navy);color:#fff;padding:30px;border-radius:18px}.contact-box h2{font-size:30px}.contact-box p{line-height:1.7;color:#dce7ff}.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.contact-form input,.contact-form select,.contact-form textarea{width:100%;padding:14px;border:1px solid #d5deef;border-radius:9px;font:inherit}.contact-form textarea{grid-column:1/-1;min-height:120px}.contact-form button{justify-self:start}.form-message{grid-column:1/-1;color:#8a3b06;background:#fff7ed;padding:12px;border-radius:8px;display:none}
+.contact{display:block}.contact-box{max-width:900px;margin:auto;background:var(--navy);color:#fff;padding:34px;border-radius:18px;text-align:center}.contact-box h2{font-size:32px;margin:10px 0}.contact-box p{line-height:1.7;color:#dce7ff;max-width:650px;margin:10px auto}.contact-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:20px}
 footer{background:var(--navy2);color:#fff;padding:35px 4.2% 20px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.footer-grid p,.footer-grid a{color:#d4def2;line-height:1.8}.footer-grid h3{margin-top:0}.copyright{border-top:1px solid #ffffff30;margin-top:25px;padding-top:18px;color:#c8d4ea;font-size:13px}
 @media(max-width:950px){nav{gap:13px;font-size:12px}.brand{font-size:25px}.trackbar{grid-template-columns:1fr 1fr}.live-note{border:0}.hero{background-position:58% center}.services{grid-template-columns:repeat(2,1fr)}.service:nth-child(2){border-right:0}.service:nth-child(-n+2){border-bottom:1px solid #c7d2e7}}
-@media(max-width:700px){.topbar{justify-content:center;font-size:11px}.topbar .group{justify-content:center;gap:12px}header{height:70px}.brand{font-size:22px}.brand-mark{width:38px;height:36px}.tagline{font-size:10px}nav{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;padding:20px;box-shadow:0 12px 15px #08245b20;flex-direction:column;align-items:stretch}nav.open{display:flex}.menu{display:block}.hero{min-height:590px;align-items:flex-start;padding:45px 6% 200px;background-image:linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.9) 42%,rgba(255,255,255,.08) 75%),url('swift-hero.jpg');background-position:58% bottom}.hero-copy{max-width:100%}h1{font-size:46px}.hero p{font-size:16px}.trackbar{margin:-45px 4% 20px;grid-template-columns:1fr;padding:12px}.track-title{padding:12px}.live-note{padding:6px}.services{padding:15px 4%;grid-template-columns:1fr 1fr}.service{padding:14px 7px}.service h3{font-size:15px}.service p{font-size:12px}.promo{margin:0 4% 20px;padding:22px;min-height:180px;background-position:center}.promo h2{font-size:24px}.service-cards{grid-template-columns:1fr}.section{padding:42px 5%}.section-head h2,.about h2{font-size:29px}.about,.contact{grid-template-columns:1fr}.about img{height:250px}.contact-form{grid-template-columns:1fr}.contact-form textarea{grid-column:auto}.footer-grid{grid-template-columns:1fr}.review-panel{padding:20px}}
+@media(max-width:700px){.topbar{justify-content:center;font-size:11px}.topbar .group{justify-content:center;gap:12px}header{height:70px}.brand{font-size:22px}.brand-mark{width:38px;height:36px}.tagline{font-size:10px}nav{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;padding:20px;box-shadow:0 12px 15px #08245b20;flex-direction:column;align-items:stretch}nav.open{display:flex}.menu{display:block}.hero{min-height:590px;align-items:flex-start;padding:45px 6% 200px;background-image:linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.9) 42%,rgba(255,255,255,.08) 75%),url('swift-hero.jpg');background-position:58% bottom}.hero-copy{max-width:100%}h1{font-size:46px}.hero p{font-size:16px}.trackbar{margin:-45px 4% 20px;grid-template-columns:1fr;padding:12px}.track-title{padding:12px}.live-note{padding:6px}.services{padding:15px 4%;grid-template-columns:1fr 1fr}.service{padding:14px 7px}.service h3{font-size:15px}.service p{font-size:12px}.promo{margin:0 4% 20px;padding:22px;min-height:180px;background-position:center}.promo h2{font-size:24px}.service-cards{grid-template-columns:1fr}.section{padding:42px 5%}.section-head h2,.about h2{font-size:29px}.about,.contact{grid-template-columns:1fr}.about img{height:250px}.contact-actions{flex-direction:column;align-items:center}.footer-grid{grid-template-columns:1fr}.review-panel{padding:20px}}
+
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1120px;margin:auto}
+.review-card{background:#fff;border:1px solid #e0e6f2;border-radius:16px;padding:23px;box-shadow:0 8px 24px #08245b0d}
+.review-card .stars{color:#f59e0b;letter-spacing:3px;font-size:21px}
+.review-card p{color:#334563;line-height:1.65;min-height:86px}
+.review-person{display:flex;align-items:center;gap:12px;border-top:1px solid #edf0f7;padding-top:15px}
+.review-person strong,.review-person small{display:block}.review-person small{color:#71809a;margin-top:4px;font-size:12px}
+.avatar{width:42px;height:42px;border-radius:50%;background:#e8efff;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:18px}
+.review-note{max-width:900px;margin:22px auto 0;text-align:center;color:#68758b;font-size:13px;line-height:1.5}
+.language-box{display:flex;align-items:center;gap:8px;color:#fff;font-weight:700}
+#google_translate_element{display:inline-block;background:#fff;border-radius:7px;padding:3px 7px;min-height:30px}
+#google_translate_element select{max-width:150px;border:0;font:inherit}
+.support-launcher{position:fixed;right:20px;bottom:20px;z-index:30;border:0;border-radius:999px;background:var(--orange);color:#fff;padding:15px 20px;font-weight:900;box-shadow:0 8px 24px #08245b40;cursor:pointer}
+.support-panel{display:none;position:fixed;right:20px;bottom:82px;width:min(340px,calc(100vw - 40px));z-index:31;background:#fff;border:1px solid #dbe3f2;border-radius:16px;box-shadow:0 12px 40px #061b4940;overflow:hidden}
+.support-panel.open{display:block}.support-head{background:var(--navy);color:#fff;padding:16px;font-weight:900}
+.support-body{padding:17px;color:#42516a;line-height:1.55}.support-body a{color:var(--navy);font-weight:900;text-decoration:underline}
+.support-close{float:right;background:transparent;border:0;color:#fff;font-size:20px}
+@media(max-width:750px){.review-grid{grid-template-columns:1fr}.review-card p{min-height:0}.language-box{width:100%;justify-content:flex-start}}
 </style>
 </head>
 <body>
 <div class="topbar">
   <div class="group"><span>🌐 Worldwide Shipping</span><span>│ Fast • Reliable • Secure</span></div>
-  <div class="group"><span>☎ Add your business phone</span><span>✉ Add your verified business email</span></div>
-  <div class="group"><span>✈ Track • Ship • Deliver</span></div>
+  <div class="group"><span>☎ Customer Support</span><span>✉ Shipping Enquiries</span></div>
+  <div class="group"><span>✈ Track • Ship • Deliver</span><div class="language-box">🌐 Translate <div id="google_translate_element"></div></div></div>
 </div>
 <header>
   <a class="brand" href="#home" aria-label="SwiftExpress home"><span class="brand-mark">➤</span><span>Swift<em>Express</em><small class="tagline">Delivering Beyond Borders</small></span></a>
@@ -87,17 +105,32 @@ footer{background:var(--navy2);color:#fff;padding:35px 4.2% 20px}.footer-grid{di
   <img src="swift-hero.jpg" alt="SwiftExpress courier team holding delivery packages beside a branded delivery van and cargo aircraft">
 </section>
 <section class="section reviews" id="reviews">
-  <div class="section-head"><div class="eyebrow">Customer experiences</div><h2>What Our Customers Say</h2><p>We value honest feedback and will feature customer reviews here as verified shipments are completed.</p></div>
-  <div class="review-panel"><div class="stars">★★★★★</div><h3>Your experience matters to us</h3><p>Have you shipped with SwiftExpress? Share your genuine feedback with our team. Customer testimonials will be published here only with permission and after verification.</p><a class="btn dark" href="#contact">Share Feedback →</a></div>
-  <p class="review-note">No customer testimonials have been published yet. We do not display invented reviews.</p>
+  <div class="section-head"><div class="eyebrow">Customer experiences</div><h2>What Customers Could Say</h2><p>These sample cards demonstrate how customer feedback will appear. They are fictional design examples, not real customer endorsements.</p></div>
+  <div class="review-grid">
+    <article class="review-card"><div class="stars">★★★★★</div><p>“The shipment updates were easy to understand, and I knew what information to ask for at each step.”</p><div class="review-person"><span class="avatar">A</span><div><strong>Sample Customer A</strong><small>Illustrative profile · Lagos, Nigeria</small></div></div></article>
+    <article class="review-card"><div class="stars">★★★★★</div><p>“The team explained the shipping options clearly and helped me understand the next steps.”</p><div class="review-person"><span class="avatar">M</span><div><strong>Sample Customer B</strong><small>Illustrative profile · London, UK</small></div></div></article>
+    <article class="review-card"><div class="stars">★★★★★</div><p>“A clean booking experience and helpful communication make a real difference when sending parcels.”</p><div class="review-person"><span class="avatar">J</span><div><strong>Sample Customer C</strong><small>Illustrative profile · Toronto, Canada</small></div></div></article>
+  </div>
+  <p class="review-note"><strong>Demo content:</strong> Replace these examples with genuine customer reviews and obtain permission before publishing them as testimonials.</p>
 </section>
 <section class="section contact" id="contact">
-  <div class="contact-box"><div class="eyebrow" style="color:#ffad68">Let's talk about your shipment</div><h2>Ready to Ship?</h2><p>Tell us what you need to send and where it is going. Our team can follow up once your business contact details and enquiry system are connected.</p><p>✉ Add your verified business email before launch</p><p>☎ Add your business phone before launch</p></div>
-  <div><h2 style="color:var(--navy);margin-top:0">Request a Shipping Quote</h2><form class="contact-form" id="quoteForm"><input required placeholder="Your full name"><input required type="email" placeholder="Your email address"><input placeholder="Pickup location"><input placeholder="Destination"><select required><option value="">Select service</option><option>Express parcel delivery</option><option>International air freight</option><option>Ocean freight</option><option>Other logistics enquiry</option></select><input placeholder="Approximate parcel weight (optional)"><textarea placeholder="Tell us about your shipment"></textarea><button class="btn" type="submit">Send Enquiry →</button><div class="form-message" id="formMessage">The enquiry form is a design preview and is not connected to email yet. A secure form service must be connected before launch.</div></form></div>
+  <div class="contact-box"><div class="eyebrow" style="color:#ffad68">We're here to help</div><h2>Contact SwiftExpress</h2><p>Have a question about a shipment or need information about our logistics services? Get in touch with our team.</p><p>Verified business contact details will be displayed here once supplied.</p><div class="contact-actions"><a class="btn" href="#tracking">Track a Shipment →</a><a class="btn dark" href="#services">Explore Our Services</a></div></div>
 </section>
 </main>
-<footer><div class="footer-grid"><div><div class="brand" style="color:white"><span class="brand-mark">➤</span><span>Swift<em>Express</em><small class="tagline" style="color:#dce7ff">Delivering Beyond Borders</small></span></div><p>Shipping enquiries and logistics information. Service availability depends on route and operational arrangements.</p></div><div><h3>Quick Links</h3><p><a href="#home">Home</a><br><a href="#services">Our Services</a><br><a href="#tracking">Track Shipment</a><br><a href="#reviews">Customer Reviews</a></p></div><div><h3>Contact</h3><p>Business email: add verified address<br>Business phone: add verified number</p></div></div><div class="copyright">© 2026 SwiftExpress. All rights reserved. Replace contact placeholders and connect backend services before accepting live bookings.</div></footer>
+<footer><div class="footer-grid"><div><div class="brand" style="color:white"><span class="brand-mark">➤</span><span>Swift<em>Express</em><small class="tagline" style="color:#dce7ff">Delivering Beyond Borders</small></span></div><p>Shipping enquiries and logistics information. Service availability depends on route and operational arrangements.</p></div><div><h3>Quick Links</h3><p><a href="#home">Home</a><br><a href="#services">Our Services</a><br><a href="#tracking">Track Shipment</a><br><a href="#reviews">Customer Reviews</a></p></div><div><h3>Contact</h3><p>Verified contact details will be published here.</p></div></div><div class="copyright">© 2026 SwiftExpress. All rights reserved. Contact details and online services will be updated as SwiftExpress operations are launched.</div></footer>
+<button class="support-launcher" id="supportOpen" type="button">💬 Live Support</button>
+<div class="support-panel" id="supportPanel" role="dialog" aria-label="Customer support">
+  <div class="support-head">SwiftExpress Support <button class="support-close" id="supportClose" type="button" aria-label="Close">×</button></div>
+  <div class="support-body"><strong>How can we help?</strong><p>Our support chat is being prepared. A real agent is not connected yet. Please provide your official WhatsApp business number or live-chat account so customers can reach your team here.</p><p>For now, use the contact section to find service information.</p><a href="#contact" id="supportContact">Go to Contact →</a></div>
+</div>
 <script>
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'en,fr,es,pt,ar,zh-CN,de,it,ja,ko,hi,ru,nl,tr,sw',layout:google.translate.TranslateElement.InlineLayout.SIMPLE},'google_translate_element');
+}
+const supportPanel=document.getElementById('supportPanel');
+document.getElementById('supportOpen').addEventListener('click',()=>supportPanel.classList.toggle('open'));
+document.getElementById('supportClose').addEventListener('click',()=>supportPanel.classList.remove('open'));
+document.getElementById('supportContact').addEventListener('click',()=>supportPanel.classList.remove('open'));
 const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
 menuBtn.addEventListener('click',()=>nav.classList.toggle('open'));
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
@@ -106,9 +139,8 @@ document.getElementById('trackBtn').addEventListener('click',()=>{
  box.style.display='block';
  box.textContent=value?'Tracking number entered: '+value+'. The live shipment database is not connected yet, so no parcel status or location can be verified.':'Please enter your shipment tracking number.';
 });
-document.getElementById('quoteForm').addEventListener('submit',e=>{
- e.preventDefault();document.getElementById('formMessage').style.display='block';
-});
+
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
