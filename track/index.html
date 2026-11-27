@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Parcel | SwiftExpress</title>
+
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fa;
+      color: #17243a;
+    }
+
+    header {
+      background: #071b36;
+      color: white;
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .brand span { color: #ff8b22; }
+
+    header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: #102d50;
+      color: white;
+      padding: 48px 20px;
+      text-align: center;
+    }
+
+    .hero h1 { margin: 0 0 12px; }
+
+    .hero p { color: #d6e1ee; }
+
+    .search-box {
+      max-width: 680px;
+      margin: 25px auto 0;
+      display: flex;
+      gap: 10px;
+      padding: 0 12px;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 16px;
+      border: 0;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    button {
+      background: #ff861c;
+      border: 0;
+      border-radius: 7px;
+      padding: 0 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #14233a;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 15px #14233a0d;
+    }
+
+    .hidden { display: none; }
+
+    .status {
+      display: inline-block;
+      background: #e7f2ff;
+      color: #15538b;
+      padding: 8px 13px;
+      border-radius: 20px;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .shipment-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    #map {
+      height: 420px;
+      width: 100%;
+      border-radius: 10px;
+      background: #e5edf4;
+    }
+
+    .checkpoint {
+      border-left: 3px solid #ff861c;
+      padding: 3px 0 18px 18px;
+      margin-left: 7px;
+    }
+
+    .checkpoint:last-child { border-left-color: transparent; }
+
+    .checkpoint strong {
+      text-transform: capitalize;
+    }
+
+    .muted {
+      color: #718096;
+      font-size: 13px;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: #718096;
+      padding: 25px;
+    }
+
+    @media(max-width: 550px) {
+      .search-box { flex-direction: column; }
+      .search-box button { padding: 15px; }
+      #map { height: 330px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">Swift<span>Express</span></div>
+  <a href="../">Home</a>
+</header>
+
+<section class="hero">
+  <h1>Track Your Shipment</h1>
+  <p>Follow your parcel's journey with SwiftExpress.</p>
+
+  <form class="search-box" id="trackingForm">
+    <input
+      id="trackingNumber"
+      type="text"
+      placeholder="Enter your tracking number"
+      required
+      autocomplete="off">
+    <button id="trackButton" type="submit">TRACK PARCEL</button>
+  </form>
+
+  <div id="message" role="status"></div>
+</section>
+
+<main>
+
+  <section id="result" class="hidden">
+
+    <div class="panel">
+      <div class="shipment-info">
+        <div>
+          <p class="muted">TRACKING NUMBER</p>
+          <h2 id="trackingCode"></h2>
+        </div>
+        <div>
+          <p class="muted">CURRENT STATUS</p>
+          <span id="currentStatus" class="status"></span>
+        </div>
+      </div>
+      <p id="lastUpdated" class="muted"></p>
+    </div>
+
+    <div class="panel">
+      <h2>Shipment Journey Map</h2>
+      <p class="muted">
+        Showing recorded shipment checkpoints.
+        Lines connect recorded locations in chronological order.
+      </p>
+      <div id="map"></div>
+      <p id="mapMessage" class="muted"></p>
+    </div>
+
+    <div class="panel">
+      <h2>Tracking History</h2>
+      <div id="history"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> SwiftExpress Logistics.
+  All rights reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase-config.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+(() => {
+  const config = window.SUPABASE_CONFIG;
+
+  if (!config || !config.url || !config.publishableKey) {
+    document.getElementById('message').textContent =
+      'Tracking service configuration is unavailable.';
+    return;
+  }
+
+  const db = window.supabase.createClient(
+    config.url,
+    config.publishableKey
+  );
+
+  let map = null;
+  let mapLayer = null;
+
+  const form = document.getElementById('trackingForm');
+  const input = document.getElementById('trackingNumber');
+  const button = document.getElementById('trackButton');
+
+  document.getElementById('year').textContent =
+    new Date().getFullYear();
+
+  function showMessage(text, error = false) {
+    const element = document.getElementById('message');
+    element.textContent = text;
+    element.style.color = error ? '#ffd0c8' : '#ffffff';
+  }
+
+  function formatDate(value) {
+    if (!value) return 'Date unavailable';
+
+    const date = new Date(value);
+
+    return Number.isNaN(date.getTime())
+      ? 'Date unavailable'
+      : date.toLocaleString();
+  }
+
+  function displayHistory(events) {
+    const history = document.getElementById('history');
+    history.replaceChildren();
+
+    if (!events || events.length === 0) {
+      history.textContent = 'No tracking checkpoints have been recorded yet.';
+      return;
+    }
+
+    events.forEach(event => {
+      const item = document.createElement('div');
+      item.className = 'checkpoint';
+
+      const status = document.createElement('strong');
+      status.textContent = String(event.status || 'Update')
+        .replaceAll('_', ' ');
+
+      const location = document.createElement('p');
+      location.textContent =
+        event.location_name || 'Location not recorded';
+
+      const date = document.createElement('p');
+      date.className = 'muted';
+      date.textContent = formatDate(event.created_at);
+
+      item.append(status, location, date);
+      history.appendChild(item);
+    });
+  }
+
+  function displayMap(events) {
+    const points = (events || []).filter(event => {
+      return event.latitude !== null &&
+        event.longitude !== null &&
+        Number.isFinite(Number(event.latitude)) &&
+        Number.isFinite(Number(event.longitude)) &&
+        Number(event.latitude) >= -90 &&
+        Number(event.latitude) <= 90 &&
+        Number(event.longitude) >= -180 &&
+        Number(event.longitude) <= 180;
+    });
+
+    if (map) {
+      map.remove();
+      map = null;
+    }
+
+    const mapElement = document.getElementById('map');
+    mapElement.replaceChildren();
+
+    if (points.length === 0) {
+      document.getElementById('mapMessage').textContent =
+        'No map locations have been recorded for this shipment yet.';
+      return;
+    }
+
+    document.getElementById('mapMessage').textContent =
+      points.length + ' recorded checkpoint(s) shown on the map.';
+
+    map = L.map('map');
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const coordinates = [];
+
+    points.forEach((point, index) => {
+      const lat = Number(point.latitude);
+      const lng = Number(point.longitude);
+      coordinates.push([lat, lng]);
+
+      const marker = L.circleMarker([lat, lng], {
+        radius: 9,
+        color: '#ffffff',
+        weight: 2,
+        fillColor: '#ff861c',
+        fillOpacity: 1
+      }).addTo(map);
+
+      const popup = document.createElement('div');
+      const heading = document.createElement('strong');
+      heading.textContent =
+        (index + 1) + '. ' +
+        (point.location_name || 'Checkpoint');
+
+      const detail = document.createElement('p');
+      detail.textContent =
+        String(point.status || '').replaceAll('_', ' ');
+
+      const date = document.createElement('small');
+      date.textContent = formatDate(point.created_at);
+
+      popup.append(heading, detail, date);
+      marker.bindPopup(popup);
+    });
+
+    if (coordinates.length > 1) {
+      L.polyline(coordinates, {
+        color: '#ff861c',
+        weight: 4,
+        opacity: 0.85
+      }).addTo(map);
+    }
+
+    if (coordinates.length === 1) {
+      map.setView(coordinates[0], 7);
+    } else {
+      map.fitBounds(coordinates, { padding: [35, 35] });
+    }
+
+    setTimeout(() => map.invalidateSize(), 100);
+  }
+
+  async function trackShipment(trackingNumber) {
+    button.disabled = true;
+    button.textContent = 'SEARCHING...';
+    showMessage('Looking up your shipment...');
+    document.getElementById('result').classList.add('hidden');
+
+    try {
+      const { data, error } = await db.rpc('track_shipment', {
+        p_tracking_number: trackingNumber
+      });
+
+      if (error) throw error;
+
+      if (!data || !data.tracking_number) {
+        showMessage('No shipment found. Please check your tracking number.', true);
+        return;
+      }
+
+      document.getElementById('trackingCode').textContent =
+        data.tracking_number;
+
+      document.getElementById('currentStatus').textContent =
+        String(data.status || 'Unknown').replaceAll('_', ' ');
+
+      document.getElementById('lastUpdated').textContent =
+        'Last updated: ' + formatDate(data.updated_at);
+
+      const events = Array.isArray(data.events) ? data.events : [];
+
+      displayHistory(events);
+      displayMap(events);
+
+      document.getElementById('result').classList.remove('hidden');
+      showMessage('Shipment found successfully.');
+
+      if (map) {
+        setTimeout(() => map.invalidateSize(), 150);
+      }
+
+    } catch (error) {
+      console.error(error);
+      showMessage(
+        'Unable to retrieve tracking information. Please try again later.',
+        true
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = 'TRACK PARCEL';
+    }
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const trackingNumber = input.value.trim();
+
+    if (trackingNumber) {
+      trackShipment(trackingNumber);
+    }
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const suppliedNumber = params.get('number');
+
+  if (suppliedNumber) {
+    input.value = suppliedNumber;
+    trackShipment(suppliedNumber);
+  }
+})();
+</script>
+
+</body>
+  </html>
+  
