@@ -134,11 +134,97 @@ document.getElementById('supportContact').addEventListener('click',()=>supportPa
 const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
 menuBtn.addEventListener('click',()=>nav.classList.toggle('open'));
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-document.getElementById('trackBtn').addEventListener('click',()=>{
- const value=document.getElementById('trackingNumber').value.trim(),box=document.getElementById('trackResult');
- box.style.display='block';
- box.textContent=value?'Tracking number entered: '+value+'. The live shipment database is not connected yet, so no parcel status or location can be verified.':'Please enter your shipment tracking number.';
+
+document.getElementById('trackBtn').addEventListener('click', async () => {
+  const input = document.getElementById('trackingNumber');
+  const box = document.getElementById('trackResult');
+  const trackingNumber = input.value.trim();
+
+  box.style.display = 'block';
+  box.textContent = 'Searching for your shipment...';
+
+  if (!trackingNumber) {
+    box.textContent = 'Please enter your tracking number.';
+    return;
+  }
+
+ 
+const SUPABASE_URL = 'https://disacapvxtzglmgxecck.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_8YW9By8AaOoasQ7iYrOdpA_oMzdpMmH';
+
+
+  try {
+    if (!window.supabase) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const { data, error } = await db.rpc('track_shipment', {
+      p_tracking_number: trackingNumber
+    });
+
+    if (error) throw error;
+
+    if (!data || !data.tracking_number) {
+      box.textContent = 'Shipment not found. Please check your tracking number.';
+      return;
+    }
+
+    box.replaceChildren();
+
+    const heading = document.createElement('h3');
+    heading.textContent = 'Shipment Tracking Details';
+    box.appendChild(heading);
+
+    const details = [
+      ['Tracking Number', data.tracking_number],
+      ['Status', data.status],
+      ['Origin', data.origin],
+      ['Destination', data.destination],
+      ['Estimated Delivery', data.estimated_delivery || 'Not available']
+    ];
+
+    details.forEach(([label, value]) => {
+      const p = document.createElement('p');
+      p.textContent = label + ': ' + value;
+      box.appendChild(p);
+    });
+
+    const historyTitle = document.createElement('h3');
+    historyTitle.textContent = 'Shipment Movement History';
+    box.appendChild(historyTitle);
+
+    (data.events || []).forEach(event => {
+      const p = document.createElement('p');
+      p.textContent =
+        event.status + ' — ' +
+        (event.location || 'Location not recorded') + ' — ' +
+        new Date(event.created_at).toLocaleString();
+      box.appendChild(p);
+    });
+
+    if (!data.events || data.events.length === 0) {
+      const p = document.createElement('p');
+      p.textContent = 'No shipment updates have been recorded yet.';
+      box.appendChild(p);
+    }
+
+  } catch (error) {
+    console.error('Tracking error:', error);
+    box.textContent = 'Unable to retrieve shipment details. Please try again.';
+  }
 });
+
 
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
