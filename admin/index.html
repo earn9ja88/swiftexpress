@@ -669,3 +669,18 @@ document.getElementById('saveMapLocationBtn').addEventListener('click', async fu
     this.disabled = false;
   }
 });
+// Connect dashboard controls
+document.getElementById('shipmentForm').addEventListener('submit', registerShipment);
+document.getElementById('search').addEventListener('input', renderShipments);
+document.getElementById('refreshBtn').addEventListener('click', loadShipments);
+
+document.getElementById('shipmentRows').addEventListener('click', (event) => {
+  const button = event.target.closest('[data-update]');
+  if (button) updateStatus(button.dataset.update);
+});
+
+checkSession();
+})();
+</script>
+</body>
+</html>
