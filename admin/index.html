@@ -178,15 +178,21 @@ th{color:var(--muted);font-size:12px}
     el.className = 'message ' + type;
   };
 
-  if (!config || !config.url || !config.publishableKey ||
-      !window.supabase || !window.supabase.createClient) {
-    message('loginMessage','Connection configuration is missing. Check supabase-config.js.','error');
-    return;
-  }
+  
+if (!config || !config.url || !config.publishableKey) {
+  message('loginMessage', 'Supabase configuration file did not load.', 'error');
+  return;
+}
 
-  const db = window.supabase.createClient(config.url, config.publishableKey);
-  let currentUser = null;
-  let shipments = [];
+if (!window.supabase || !window.supabase.createClient) {
+  message('loginMessage', 'Supabase library did not load.', 'error');
+  return;
+}
+
+const db = window.supabase.createClient(config.url, config.publishableKey);
+let currentUser = null;
+let shipments = [];
+
 
   const statuses = [
     'pending','received','processing','picked_up',
