@@ -107,6 +107,26 @@ th{color:var(--muted);font-size:12px}
   <p class="note">Select a shipment to manage its recorded location.</p>
   <div id="shipmentMap" style="height:420px;width:100%;border-radius:10px;z-index:1"></div>
   <p id="mapMessage" class="message">Map is loading...</p>
+
+<div style="margin-top:15px">
+  <label>Select shipment</label>
+  <select id="mapShipmentSelect">
+    <option value="">Choose a shipment</option>
+  </select>
+
+  <label style="margin-top:12px">Checkpoint location</label>
+  <input id="mapLocationName" type="text" placeholder="Enter city, country or address">
+
+  <label style="margin-top:12px">Latitude</label>
+  <input id="mapLatitude" type="number" step="any" placeholder="Latitude">
+
+  <label style="margin-top:12px">Longitude</label>
+  <input id="mapLongitude" type="number" step="any" placeholder="Longitude">
+
+  <button type="button" id="saveMapLocationBtn" style="margin-top:15px">
+    Save shipment location
+  </button>
+  </div>
 </section>
     <div class="grid">
       <section class="panel">
@@ -237,9 +257,51 @@ let shipments = [];
     currentUser = user;
     document.getElementById('loginPanel').classList.add('hidden');
     document.getElementById('dashboard').classList.remove('hidden');
-    await loadShipments();
+await loadShipments();
+initShipmentMap();
+}
+let shipmentMap = null;
+let shipmentMarker = null;
+
+function initShipmentMap() {
+  if (typeof L === 'undefined') {
+    message('mapMessage', 'Map library failed to load. Check your internet connection.', 'error');
+    return;
   }
 
+  if (shipmentMap) {
+    setTimeout(() => shipmentMap.invalidateSize(), 200);
+    return;
+  }
+
+  shipmentMap = L.map('shipmentMap').setView([9.082, 8.6753], 5);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(shipmentMap);
+
+  shipmentMap.on('click', function(event) {
+    const lat = event.latlng.lat;
+    const lng = event.latlng.lng;
+
+    document.getElementById('mapLatitude').value = lat.toFixed(6);
+    document.getElementById('mapLongitude').value = lng.toFixed(6);
+
+    if (shipmentMarker) {
+      shipmentMarker.setLatLng(event.latlng);
+    } else {
+  shipmentMarker = L.marker(event.latlng, { draggable: true }).addTo(shipmentMap);
+}
+
+shipmentMarker.on('dragend', function() {
+  const position = shipmentMarker.getLatLng();
+
+  document.getElementById('mapLatitude').value = position.lat.toFixed(6);
+  document.getElementById('mapLongitude').value = position.lng.toFixed(6);
+
+  message('mapMessage', 'Marker moved. Save to record the new location.');
+});
   async function loadShipments() {
     message('listMessage','Loading shipments...');
     const {data,error} = await db.from('shipments')
@@ -253,6 +315,18 @@ let shipments = [];
     }
 
     shipments = data || [];
+
+const mapSelect = document.getElementById('mapShipmentSelect');
+mapSelect.innerHTML = '<option value="">Choose a shipment</option>';
+
+shipments.forEach(shipment => {
+  const option = document.createElement('option');
+  option.value = shipment.id;
+  option.textContent = shipment.tracking_number + ' — ' + (shipment.receiver_name || 'Customer');
+  mapSelect.appendChild(option);
+});
+
+document.getElementById('totalCount').textContent = shipments.length;
     document.getElementById('totalCount').textContent = shipments.length;
     document.getElementById('pendingCount').textContent =
       shipments.filter(s=>s.status==='pending').length;
@@ -486,18 +560,112 @@ async function updateStatus(id) {
   });
 
   // Connect dashboard controls
-  document.getElementById('shipmentForm').addEventListener('submit', registerShipment);
-  document.getElementById('search').addEventListener('input', renderShipments);
-  document.getElementById('refreshBtn').addEventListener('click', loadShipments);
+  document.getElementById('mapShipmentSelect').addEventListener('change', async function() {
+  const shipmentId = this.value;
 
-  document.getElementById('shipmentRows').addEventListener('click', (event) => {
-    const button = event.target.closest('[data-update]');
-    if (button) updateStatus(button.dataset.update);
-  });
+  if (!shipmentId) return;
 
-  checkSession();
-})();
-</script>
-</body>
-</html>
+  message('mapMessage', 'Loading shipment location...');
 
+  const { data, error } = await db
+    .from('shipment_events')
+    .select('location_name,latitude,longitude,created_at')
+    .eq('shipment_id', shipmentId)
+    .not('latitude', 'is', null)
+    .not('longitude', 'is', null)
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  if (error) {
+    message('mapMessage', 'Could not load location: ' + error.message, 'error');
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    message('mapMessage', 'No recorded location for this shipment yet.');
+    return;
+  }
+
+  const location = data[0];
+  const lat = Number(location.latitude);
+  const lng = Number(location.longitude);
+
+  document.getElementById('mapLocationName').value = location.location_name || '';
+  document.getElementById('mapLatitude').value = lat;
+  document.getElementById('mapLongitude').value = lng;
+
+  const position = [lat, lng];
+
+  if (shipmentMarker) {
+    shipmentMarker.setLatLng(position);
+  } else {
+    shipmentMarker = L.marker(position, { draggable: true }).addTo(shipmentMap);
+
+    shipmentMarker.on('dragend', function() {
+      const point = shipmentMarker.getLatLng();
+      document.getElementById('mapLatitude').value = point.lat.toFixed(6);
+      document.getElementById('mapLongitude').value = point.lng.toFixed(6);
+      message('mapMessage', 'Marker moved. Save to record the new location.');
+    });
+  }
+
+  shipmentMap.setView(position, 12);
+  shipmentMarker.bindPopup(location.location_name || 'Recorded shipment location').openPopup();
+
+message('mapMessage', 'Latest recorded shipment location loaded.');
+});
+
+document.getElementById('saveMapLocationBtn').addEventListener('click', async function() {
+  const shipmentId = document.getElementById('mapShipmentSelect').value;
+  const locationName = document.getElementById('mapLocationName').value.trim();
+  const latitude = Number(document.getElementById('mapLatitude').value);
+  const longitude = Number(document.getElementById('mapLongitude').value);
+
+  if (!shipmentId) {
+    message('mapMessage', 'Please select a shipment.', 'error');
+    return;
+  }
+
+  if (!locationName || document.getElementById('mapLatitude').value === '' ||
+      document.getElementById('mapLongitude').value === '') {
+    message('mapMessage', 'Enter a location and select its coordinates on the map.', 'error');
+    return;
+  }
+
+  if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90 ||
+      !Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
+    message('mapMessage', 'Please enter valid latitude and longitude.', 'error');
+    return;
+  }
+
+  const shipment = shipments.find(item => item.id === shipmentId);
+
+  if (!shipment) {
+    message('mapMessage', 'Shipment not found. Refresh and try again.', 'error');
+    return;
+  }
+
+  this.disabled = true;
+  message('mapMessage', 'Saving shipment location...');
+
+  try {
+    const { error } = await db.from('shipment_events').insert({
+      shipment_id: shipmentId,
+      status: shipment.status,
+      location_name: locationName,
+      latitude: latitude,
+      longitude: longitude
+    });
+
+    if (error) throw error;
+
+    message('mapMessage', 'Shipment location saved successfully.', 'success');
+    if (shipmentMarker) {
+      shipmentMarker.bindPopup(locationName).openPopup();
+    }
+  } catch (error) {
+    message('mapMessage', 'Could not save location: ' + error.message, 'error');
+  } finally {
+    this.disabled = false;
+  }
+});
