@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SwiftExpress | Admin Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../supabase-config.js"></script>
+<script src="./supabase-config.js"></script>
 <style>
 :root {
   --navy:#101e36;
@@ -419,3 +419,70 @@ async function updateStatus(id) {
     );
   }
 }
+  // Connect administrator login
+  document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const button = document.querySelector('#loginForm button[type="submit"]');
+    button.disabled = true;
+    message('loginMessage', 'Signing in...');
+
+    try {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      const { data, error } = await db.auth.signInWithPassword({ email, password });
+
+      if (error) throw error;
+
+      await showDashboard(data.user);
+    } catch (error) {
+      message('loginMessage', 'Login failed: ' + error.message, 'error');
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  // Restore an existing session
+  async function checkSession() {
+    const { data, error } = await db.auth.getSession();
+
+    if (error) {
+      message('loginMessage', error.message, 'error');
+      return;
+    }
+
+    if (data.session) await showDashboard(data.session.user);
+  }
+
+  // Sign out
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    const { error } = await db.auth.signOut();
+
+    if (error) {
+      message('listMessage', error.message, 'error');
+      return;
+    }
+
+    currentUser = null;
+    document.getElementById('dashboard').classList.add('hidden');
+    document.getElementById('loginPanel').classList.remove('hidden');
+    message('loginMessage', 'You have signed out successfully.', 'success');
+  });
+
+  // Connect dashboard controls
+  document.getElementById('shipmentForm').addEventListener('submit', registerShipment);
+  document.getElementById('search').addEventListener('input', renderShipments);
+  document.getElementById('refreshBtn').addEventListener('click', loadShipments);
+
+  document.getElementById('shipmentRows').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-update]');
+    if (button) updateStatus(button.dataset.update);
+  });
+
+  checkSession();
+})();
+</script>
+</body>
+</html>
+
