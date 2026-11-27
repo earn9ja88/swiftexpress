@@ -302,6 +302,12 @@ shipmentMarker.on('dragend', function() {
 
   message('mapMessage', 'Marker moved. Save to record the new location.');
 });
+
+  });
+
+  message('mapMessage', 'Map loaded. Select a location on the map.');
+}
+
   async function loadShipments() {
     message('listMessage','Loading shipments...');
     const {data,error} = await db.from('shipments')
