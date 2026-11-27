@@ -349,75 +349,73 @@ th{color:var(--muted);font-size:12px}
     await loadShipments();
   }
 
-  async function updateStatus(id) {
-    const select = document.querySelector(`[data-status="${id}"]`);
-    const newStatus = select.value;
-    const shipment = shipments.find(s=>s.id===id);
-    if (!shipment || shipment.status===newStatus) return;
+  
+async function updateStatus(id) {
+  const select = document.querySelector(`[data-status="${id}"]`);
+  const newStatus = select.value;
+  const shipment = shipments.find(s => s.id === id);
 
-    const {error} = await db.from('shipments')
-      .update({status:newStatus,updated_at:new Date().toISOString()})
-      .eq('id',id);
+  if (!shipment || shipment.status === newStatus) return;
 
-    if (error) {
-      message('listMessage','Status update failed: '+error.message,'error');
-      return;
-    }
+  const locationName = prompt(
+    'Enter checkpoint name (e.g. Lagos Sorting Facility):'
+  );
+  if (!locationName || !locationName.trim()) return;
 
-    const {error:eventError} = await db.from('shipment_events').insert({
-      shipment_id:id,
-      status:newStatus,
-      notes:'Shipment status updated by SwiftExpress administrator.',
-      created_by:currentUser.id
-    });
+  const latitudeText = prompt('Enter checkpoint latitude:');
+  if (latitudeText === null || latitudeText.trim() === '') return;
 
-    await loadShipments();
+  const longitudeText = prompt('Enter checkpoint longitude:');
+  if (longitudeText === null || longitudeText.trim() === '') return;
 
-    if (eventError) {
-      message('listMessage','Status updated, but tracking history failed: '+eventError.message,'error');
-    } else {
-      message('listMessage','Shipment status and tracking history updated.','success');
-    }
+  const latitude = Number(latitudeText);
+  const longitude = Number(longitudeText);
+
+  if (
+    !Number.isFinite(latitude) ||
+    !Number.isFinite(longitude) ||
+    latitude < -90 || latitude > 90 ||
+    longitude < -180 || longitude > 180
+  ) {
+    message('listMessage', 'Invalid coordinates. Please try again.', 'error');
+    return;
   }
 
-  document.getElementById('loginForm').addEventListener('submit',async e=>{
-    e.preventDefault();
-    message('loginMessage','Signing in...');
-    const {data,error} = await db.auth.signInWithPassword({
-      email:document.getElementById('email').value.trim(),
-      password:document.getElementById('password').value
-    });
-    if (error) {
-      message('loginMessage','Sign-in failed: '+error.message,'error');
-      return;
-    }
-    await showDashboard(data.user);
+  const { error } = await db.from('shipments')
+    .update({
+      status: newStatus,
+      updated_at: new Date().toISOString()
+    })
+    .eq('id', id);
+
+  if (error) {
+    message('listMessage', 'Status update failed: ' + error.message, 'error');
+    return;
+  }
+
+  const { error: eventError } = await db.from('shipment_events').insert({
+    shipment_id: id,
+    status: newStatus,
+    location_name: locationName.trim(),
+    latitude: latitude,
+    longitude: longitude,
+    notes: 'Checkpoint recorded by SwiftExpress administrator.',
+    created_by: currentUser.id
   });
 
-  document.getElementById('shipmentForm').addEventListener('submit',registerShipment);
-  document.getElementById('refreshBtn').addEventListener('click',loadShipments);
-  document.getElementById('search').addEventListener('input',renderShipments);
-  document.getElementById('shipmentRows').addEventListener('click',e=>{
-    const button = e.target.closest('[data-update]');
-    if (button) updateStatus(button.dataset.update);
-  });
-  document.getElementById('logoutBtn').addEventListener('click',async()=>{
-    await db.auth.signOut();
-    currentUser = null;
-    document.getElementById('dashboard').classList.add('hidden');
-    document.getElementById('loginPanel').classList.remove('hidden');
-    message('loginMessage','You have signed out.','success');
-  });
+  await loadShipments();
 
-  db.auth.getSession().then(async({data,error})=>{
-    if (error) {
-      message('loginMessage','Could not check your session: '+error.message,'error');
-      return;
-    }
-    if (data.session) await showDashboard(data.session.user);
-  });
-})();
-</script>
-</body>
-                   </html>
-          
+  if (eventError) {
+    message(
+      'listMessage',
+      'Status updated, but checkpoint could not be saved: ' + eventError.message,
+      'error'
+    );
+  } else {
+    message(
+      'listMessage',
+      'Shipment status and map checkpoint saved successfully.',
+      'success'
+    );
+  }
+}
